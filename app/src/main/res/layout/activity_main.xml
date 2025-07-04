@@ -7,14 +7,26 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        app:layout_constraintTop_toTopOf="parent">
-        <ImageView
-            android:layout_width=""
-            android:layout_height=""/>
+    <View
+        android:id="@+id/top_curve_background"
+        android:layout_width="0dp"
+        android:layout_height="350dp"
+        android:layout_marginTop="-100dp"
+        android:background="@drawable/blue_gradient_circle_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="1.2" />
 
-    </FrameLayout>
+    <View
+        android:id="@+id/bottom_curve_background"
+        android:layout_width="0dp"
+        android:layout_height="170dp"
+        android:layout_marginBottom="-100dp"
+        android:background="@drawable/blue_gradient_circle_bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
