@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <View
+    <FrameLayout
         android:id="@+id/top_curve_background"
         android:layout_width="0dp"
         android:layout_height="350dp"
@@ -16,7 +16,36 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="1.2" />
+        app:layout_constraintWidth_percent="1.2">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="70dp"
+            android:gravity="center"
+            android:orientation="vertical"> <!-- Center content within this LinearLayout -->
+
+            <ImageView
+                android:id="@+id/logo_image_shape"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:contentDescription="Company Logo"
+                android:src="@drawable/user_check_svgrepo_com"
+                app:tint="@android:color/white" /> <!-- Tint the logo if it's a vector drawable -->
+
+            <TextView
+                android:id="@+id/logo_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Authentication"
+                android:textColor="@android:color/white"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </FrameLayout>
 
     <View
         android:id="@+id/bottom_curve_background"
