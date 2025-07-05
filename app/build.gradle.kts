@@ -44,7 +44,8 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
-    //dagger
+    //dagger2
+
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)
     implementation(libs.dagger.android)

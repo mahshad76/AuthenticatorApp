@@ -1,4 +1,4 @@
-package com.mahshad.authenticatorapp.login
+package com.mahshad.authenticatorapp.signinsignup.login
 
 import android.os.Bundle
 import android.view.LayoutInflater
