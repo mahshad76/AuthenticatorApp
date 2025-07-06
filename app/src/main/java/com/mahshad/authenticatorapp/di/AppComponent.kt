@@ -4,8 +4,10 @@ import android.content.Context
 import com.mahshad.authenticatorapp.welcome.di.WelcomeActivityComponent
 import dagger.BindsInstance
 import dagger.Component
+import javax.inject.Singleton
 
-@Component
+@Singleton
+@Component(modules = [AppSubcomponents::class])
 interface AppComponent {
     @Component.Factory
     interface Factory {
