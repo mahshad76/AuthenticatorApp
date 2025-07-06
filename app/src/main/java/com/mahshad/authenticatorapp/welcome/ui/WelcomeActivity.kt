@@ -1,4 +1,4 @@
-package com.mahshad.authenticatorapp.signinsignup
+package com.mahshad.authenticatorapp.welcome.ui
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
