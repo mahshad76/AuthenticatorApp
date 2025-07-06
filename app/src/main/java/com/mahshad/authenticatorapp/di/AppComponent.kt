@@ -11,7 +11,7 @@ import javax.inject.Singleton
 interface AppComponent {
     @Component.Factory
     interface Factory {
-        fun factory(@BindsInstance context: Context): AppComponent
+        fun create(@BindsInstance context: Context): AppComponent
     }
     /*
      * Provides a builder for the [WelcomeActivityComponent] to be created
