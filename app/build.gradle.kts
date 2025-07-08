@@ -59,11 +59,6 @@ dependencies {
 
     //rxbinding
 
-    implementation(libs.rxbinding)
-    implementation(libs.rxbinding.appcompat)
-    implementation(libs.rxbinding.core)
-    implementation(libs.rxbinding.material)
-    implementation(libs.rxbinding.recyclerview)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
