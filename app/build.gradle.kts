@@ -58,7 +58,8 @@ dependencies {
     implementation(libs.rxandroid)
 
     //rxbinding
-
+    implementation(libs.rxbinding.appcompat.v310)
+    implementation(libs.rxbinding.core.v310)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

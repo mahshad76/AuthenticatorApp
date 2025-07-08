@@ -12,6 +12,8 @@ activity = "1.10.1"
 constraintlayout = "2.2.1"
 rxandroid = "2.1.1"
 rxbinding = "4.0.0"
+rxbindingAppcompat = "3.1.0"
+rxbindingCore = "3.1.0"
 rxjava = "2.2.21"
 
 [libraries]
@@ -31,7 +33,9 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 rxandroid = { module = "io.reactivex.rxjava2:rxandroid", version.ref = "rxandroid" }
 rxbinding = { module = "com.jakewharton.rxbinding3:rxbinding", version.ref = "rxbinding" }
 rxbinding-appcompat = { module = "com.jakewharton.rxbinding3:rxbinding-appcompat", version.ref = "rxbinding" }
+rxbinding-appcompat-v310 = { module = "com.jakewharton.rxbinding3:rxbinding-appcompat", version.ref = "rxbindingAppcompat" }
 rxbinding-core = { module = "com.jakewharton.rxbinding3:rxbinding-core", version.ref = "rxbinding" }
+rxbinding-core-v310 = { module = "com.jakewharton.rxbinding3:rxbinding-core", version.ref = "rxbindingCore" }
 rxbinding-material = { module = "com.jakewharton.rxbinding3:rxbinding-material", version.ref = "rxbinding" }
 rxbinding-recyclerview = { module = "com.jakewharton.rxbinding3:rxbinding-recyclerview", version.ref = "rxbinding" }
 rxjava = { module = "io.reactivex.rxjava2:rxjava", version.ref = "rxjava" }
