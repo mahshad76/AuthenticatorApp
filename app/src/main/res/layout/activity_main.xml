@@ -8,7 +8,7 @@
     tools:context=".welcome.ui.WelcomeActivity">
 
     <FrameLayout
-        android:id="@+id/top_curve_background"
+        android:id="@+id/top_curve"
         android:layout_width="0dp"
         android:layout_height="350dp"
         android:layout_marginTop="-100dp"
@@ -47,10 +47,17 @@
         </LinearLayout>
     </FrameLayout>
 
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/bottom_curve"
+        app:layout_constraintTop_toBottomOf="@id/top_curve" />
+
     <View
-        android:id="@+id/bottom_curve_background"
+        android:id="@+id/bottom_curve"
         android:layout_width="0dp"
-        android:layout_height="170dp"
+        android:layout_height="150dp"
         android:layout_marginBottom="-100dp"
         android:background="@drawable/blue_gradient_circle_bottom"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -5,5 +5,5 @@ import androidx.fragment.app.Fragment
 
 object AppCompatActivityExtensions {
     fun AppCompatActivity.replaceFragment(id: Int, fragment: Fragment) =
-        supportFragmentManager.beginTransaction().replace(id, fragment)
+        supportFragmentManager.beginTransaction().replace(id, fragment).commit()
 }
