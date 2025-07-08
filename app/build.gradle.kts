@@ -52,6 +52,19 @@ dependencies {
     implementation(libs.dagger.android.support)
     kapt(libs.dagger.android.processor)
 
+    //rxjava2
+
+    implementation(libs.rxjava)
+    implementation(libs.rxandroid)
+
+    //rxbinding
+
+    implementation(libs.rxbinding)
+    implementation(libs.rxbinding.appcompat)
+    implementation(libs.rxbinding.core)
+    implementation(libs.rxbinding.material)
+    implementation(libs.rxbinding.recyclerview)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
