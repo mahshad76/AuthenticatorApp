@@ -11,10 +11,10 @@ import com.mahshad.authenticatorapp.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment(), Contract.View {
 
-    private lateinit var loginFragment: FragmentLoginBinding
-    private lateinit var usernameText: EditText
-    private lateinit var passwordText: EditText
-    private lateinit var loginButton: Button
+    lateinit var loginFragment: FragmentLoginBinding
+    lateinit var usernameText: EditText
+    lateinit var passwordText: EditText
+    lateinit var loginButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,5 +29,17 @@ class LoginFragment : Fragment(), Contract.View {
         passwordText = loginFragment.passwordEditText
         loginButton = loginFragment.myGradientMaterialButton
         return loginFragment.root ?: null
+    }
+
+    override fun observableUsernameEditText() {
+        TODO("Not yet implemented")
+    }
+
+    override fun observablePasswordEditText() {
+        TODO("Not yet implemented")
+    }
+
+    override fun observableLoginButton() {
+        TODO("Not yet implemented")
     }
 }

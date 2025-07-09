@@ -14,4 +14,10 @@ class Presenter : Contract.Presenter {
     override fun destroyView() {
         TODO("Not yet implemented")
     }
+
+    override fun usernameListener() {
+    }
+
+    override fun passwordListener() {}
+    override fun loginButtonListener() {}
 }

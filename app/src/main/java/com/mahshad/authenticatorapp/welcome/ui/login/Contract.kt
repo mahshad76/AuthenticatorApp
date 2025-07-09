@@ -5,6 +5,9 @@ import com.mahshad.authenticatorapp.common.BaseView
 
 interface Contract {
     interface View : BaseView {
+        fun observableUsernameEditText()
+        fun observablePasswordEditText()
+        fun observableLoginButton()
 //        fun showLoading()
 //        fun hideLoading()
 //        fun successfulMessage()
@@ -16,7 +19,9 @@ interface Contract {
      * Interactions with the views are converted into observables via the RxBinding library.
      */
     interface Presenter : BasePresenter<Contract.View> {
-
+        fun usernameListener()
+        fun passwordListener()
+        fun loginButtonListener()
 
     }
 }
