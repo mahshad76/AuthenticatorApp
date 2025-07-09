@@ -7,6 +7,7 @@ import com.mahshad.authenticatorapp.welcome.ui.signup.SignUpFragment
 import dagger.Subcomponent
 
 @Subcomponent
+@WelcomeActivityScope
 interface WelcomeActivityComponent {
     @Subcomponent.Factory
     interface Factory {
