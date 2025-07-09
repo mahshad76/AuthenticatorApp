@@ -13,10 +13,10 @@ interface AppComponent {
     interface Factory {
         fun create(@BindsInstance context: Context): AppComponent
     }
-    /*
+
+    /**
      * Provides a builder for the [WelcomeActivityComponent] to be created
      * as a subcomponent of [AppComponent].
      */
-
     fun welcomeComponent(): WelcomeActivityComponent.Factory
 }

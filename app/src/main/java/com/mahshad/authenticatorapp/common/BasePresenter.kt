@@ -9,6 +9,7 @@ interface BasePresenter<in T : BaseView> {
      * presenter's generic parameter `T`.
      */
     fun attachView(view: T)
+
     /**
      * * When the view is destroyed, this method must be called, so the presenter doesn't try to
      * interact with a destroyed view and the grabage collector can collect the
