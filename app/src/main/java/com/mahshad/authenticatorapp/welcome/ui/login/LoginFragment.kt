@@ -7,14 +7,17 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import com.jakewharton.rxbinding3.view.clicks
+import com.jakewharton.rxbinding3.widget.textChanges
 import com.mahshad.authenticatorapp.databinding.FragmentLoginBinding
+import io.reactivex.Observable
 
 class LoginFragment : Fragment(), Contract.View {
 
-    lateinit var loginFragment: FragmentLoginBinding
-    lateinit var usernameText: EditText
-    lateinit var passwordText: EditText
-    lateinit var loginButton: Button
+    private var loginFragment: FragmentLoginBinding? = null
+    private var usernameText: EditText? = null
+    private var passwordText: EditText? = null
+    private var loginButton: Button? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,21 +28,21 @@ class LoginFragment : Fragment(), Contract.View {
         savedInstanceState: Bundle?
     ): View? {
         loginFragment = FragmentLoginBinding.inflate(inflater)
-        usernameText = loginFragment.usernameEditText
-        passwordText = loginFragment.passwordEditText
-        loginButton = loginFragment.myGradientMaterialButton
-        return loginFragment.root ?: null
+        usernameText = loginFragment?.usernameEditText
+        passwordText = loginFragment?.passwordEditText
+        loginButton = loginFragment?.myGradientMaterialButton
+        return loginFragment?.root
     }
 
-    override fun observableUsernameEditText() {
-        TODO("Not yet implemented")
+    override fun observableUsernameEditText(): Observable<CharSequence>? {
+        return usernameText?.textChanges()
     }
 
-    override fun observablePasswordEditText() {
-        TODO("Not yet implemented")
+    override fun observablePasswordEditText(): Observable<CharSequence>? {
+        return passwordText?.textChanges()
     }
 
-    override fun observableLoginButton() {
-        TODO("Not yet implemented")
+    override fun observableLoginButton(): Observable<Unit>? {
+        return loginButton?.clicks()
     }
 }

@@ -2,12 +2,13 @@ package com.mahshad.authenticatorapp.welcome.ui.login
 
 import com.mahshad.authenticatorapp.common.BasePresenter
 import com.mahshad.authenticatorapp.common.BaseView
+import io.reactivex.Observable
 
 interface Contract {
     interface View : BaseView {
-        fun observableUsernameEditText()
-        fun observablePasswordEditText()
-        fun observableLoginButton()
+        fun observableUsernameEditText(): Observable<CharSequence>?
+        fun observablePasswordEditText(): Observable<CharSequence>?
+        fun observableLoginButton(): Observable<Unit>?
 //        fun showLoading()
 //        fun hideLoading()
 //        fun successfulMessage()
