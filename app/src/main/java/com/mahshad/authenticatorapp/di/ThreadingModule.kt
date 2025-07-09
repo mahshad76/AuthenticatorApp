@@ -6,7 +6,6 @@ import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module
@@ -31,15 +30,3 @@ object ThreadingModule {
     fun provideCompositeDisposable() = CompositeDisposable()
 
 }
-
-@Qualifier
-@Retention(AnnotationRetention.RUNTIME)
-annotation class ComputationScheduler
-
-@Qualifier
-@Retention(AnnotationRetention.RUNTIME)
-annotation class IoScheduler
-
-@Qualifier
-@Retention(AnnotationRetention.RUNTIME)
-annotation class MainScheduler
