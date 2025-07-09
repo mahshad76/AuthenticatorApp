@@ -11,7 +11,11 @@ interface Contract {
 //        fun unSuccessfulMessage()
     }
 
-    interface Presenter: BasePresenter<Contract.View> {
+    /**
+     * The logic for updating the [LoginFragment] is defined by the [Presenter].
+     * Interactions with the views are converted into observables via the RxBinding library.
+     */
+    interface Presenter : BasePresenter<Contract.View> {
 
 
     }
