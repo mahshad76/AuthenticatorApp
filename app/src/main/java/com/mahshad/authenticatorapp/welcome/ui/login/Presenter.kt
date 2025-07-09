@@ -23,7 +23,7 @@ class Presenter : Contract.Presenter {
             ?.debounce(300, TimeUnit.MILLISECONDS)
             ?.filter { username: CharSequence -> !username.isEmpty() && username.length > 7 }
             ?.map { username: CharSequence -> username.trim().toString() }
-            ?.switchMap { TODO("call a functions which return an observable") }
+            //?.switchMap { TODO("call a functions which return an observable") }
 
     }
 
