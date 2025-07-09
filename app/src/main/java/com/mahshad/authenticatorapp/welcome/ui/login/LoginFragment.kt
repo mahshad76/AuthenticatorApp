@@ -9,7 +9,7 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.mahshad.authenticatorapp.databinding.FragmentLoginBinding
 
-class LoginFragment : Fragment() {
+class LoginFragment : Fragment(), Contract.View {
 
     private lateinit var loginFragment: FragmentLoginBinding
     private lateinit var usernameText: EditText
