@@ -24,7 +24,7 @@ interface Contract {
         fun loginValidationFlow(
             usernameObservable: Observable<String>?,
             passwordObservable: Observable<String>?
-        ): Observable<Boolean>
+        )
 
         fun loginButtonListener()
     }

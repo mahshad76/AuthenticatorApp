@@ -1,11 +1,16 @@
 package com.mahshad.authenticatorapp.welcome.ui.login
 
 import io.reactivex.Observable
+import io.reactivex.Observer
 import io.reactivex.Scheduler
+import io.reactivex.disposables.Disposable
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class Presenter @Inject constructor(private val ioScheduler: Scheduler) :
+class Presenter @Inject constructor(
+    private val ioScheduler: Scheduler,
+    private val mainScheduler: Scheduler
+) :
     Contract.Presenter {
     private var view: Contract.View? = null
 
@@ -33,26 +38,42 @@ class Presenter @Inject constructor(private val ioScheduler: Scheduler) :
         }
     }
 
-
     override fun loginValidationFlow(
         usernameObservable: Observable<String>?,
         passwordObservable: Observable<String>?
-    ): Observable<Boolean> {
+    ) {
         return Observable.combineLatest(
             usernameObservable,
             passwordObservable
         ) { username: String, password: String ->
             isValidUsername(username) && isValidPassword(password)
-        }
+        }.observeOn(ioScheduler).subscribeOn(mainScheduler).subscribe(
+            object : Observer<Boolean> {
+                override fun onSubscribe(d: Disposable) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onError(e: Throwable) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onComplete() {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onNext(t: Boolean) {
+                    TODO("Not yet implemented")
+                }
+
+            }
+        )
     }
 
-    fun isValidUsername(username: String): Boolean {
-        return false
-    }
+    fun isValidUsername(username: String): Boolean =
+        username.length > 3 && !username.isEmpty()
 
-    fun isValidPassword(password: String): Boolean {
-        return false
-    }
+    fun isValidPassword(password: String): Boolean =
+        password.isNotBlank() && password.length >= 6
 
     override fun loginButtonListener() {
         view?.observableLoginButton()
