@@ -1,7 +1,7 @@
 package com.mahshad.authenticatorapp.di
 
-import com.mahshad.authenticatorapp.data.local.UsernameSharedPref
-import com.mahshad.authenticatorapp.data.local.UsernameSharedPrefImpl
+import com.mahshad.authenticatorapp.data.local.UserSharedPref
+import com.mahshad.authenticatorapp.data.local.UserSharedPrefImpl
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton
@@ -10,6 +10,6 @@ import javax.inject.Singleton
 abstract class LocalDataSourceModule {
     @Binds
     @Singleton
-    abstract fun provideUsernameSharedPref(usernameSharedPref: UsernameSharedPrefImpl):
-            UsernameSharedPref
+    abstract fun provideUsernameSharedPref(userSharedPref: UserSharedPrefImpl):
+            UserSharedPref
 }

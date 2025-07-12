@@ -20,9 +20,12 @@ interface Contract {
      * Interactions with the views are converted into observables via the RxBinding library.
      */
     interface Presenter : BasePresenter<Contract.View> {
-        fun usernameListener()
-        fun passwordListener()
-        fun loginButtonListener()
+        fun editTextToObservable(): Observable<String>?
+        fun loginValidationFlow(
+            usernameObservable: Observable<String>?,
+            passwordObservable: Observable<String>?
+        ): Observable<Boolean>
 
+        fun loginButtonListener()
     }
 }

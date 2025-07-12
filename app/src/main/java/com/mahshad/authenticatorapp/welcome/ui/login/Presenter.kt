@@ -1,8 +1,12 @@
 package com.mahshad.authenticatorapp.welcome.ui.login
 
+import io.reactivex.Observable
+import io.reactivex.Scheduler
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
-class Presenter : Contract.Presenter {
+class Presenter @Inject constructor(private val ioScheduler: Scheduler) :
+    Contract.Presenter {
     private var view: Contract.View? = null
 
     override fun attachView(view: Contract.View) {
@@ -17,18 +21,37 @@ class Presenter : Contract.Presenter {
         TODO("Not yet implemented")
     }
 
-    override fun usernameListener() {
-        view?.observableUsernameEditText()
-            ?.skip(1)
-            ?.debounce(300, TimeUnit.MILLISECONDS)
-            ?.filter { username: CharSequence -> !username.isEmpty() && username.length > 7 }
-            ?.map { username: CharSequence -> username.trim().toString() }
-            //?.switchMap { TODO("call a functions which return an observable") }
-
+    override fun editTextToObservable(): Observable<String>? {
+        return view?.let { nonNullEditTextView ->
+            nonNullEditTextView
+                .observableUsernameEditText()
+                ?.skip(1)
+                ?.debounce(300, TimeUnit.MILLISECONDS)
+                ?.map { it.toString() }
+                ?.distinct()
+                ?.observeOn(ioScheduler)
+        }
     }
 
-    override fun passwordListener() {
-        view?.observablePasswordEditText()
+
+    override fun loginValidationFlow(
+        usernameObservable: Observable<String>?,
+        passwordObservable: Observable<String>?
+    ): Observable<Boolean> {
+        return Observable.combineLatest(
+            usernameObservable,
+            passwordObservable
+        ) { username: String, password: String ->
+            isValidUsername(username) && isValidPassword(password)
+        }
+    }
+
+    fun isValidUsername(username: String): Boolean {
+        return false
+    }
+
+    fun isValidPassword(password: String): Boolean {
+        return false
     }
 
     override fun loginButtonListener() {
