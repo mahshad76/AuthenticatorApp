@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
-import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.textChanges
 import com.mahshad.authenticatorapp.databinding.FragmentLoginBinding
 import io.reactivex.Observable
@@ -34,15 +33,12 @@ class LoginFragment : Fragment(), Contract.View {
         return loginFragment?.root
     }
 
-    override fun observableUsernameEditText(): Observable<CharSequence>? {
-        return usernameText?.textChanges()
-    }
+    override fun usernameEditText(): Observable<CharSequence>? = usernameText?.textChanges()
 
-    override fun observablePasswordEditText(): Observable<CharSequence>? {
-        return passwordText?.textChanges()
-    }
+    override fun passwordEditText(): Observable<CharSequence>? = passwordText?.textChanges()
 
-    override fun observableLoginButton(): Observable<Unit>? {
-        return loginButton?.clicks()
+
+    override fun loginButton(): Button? {
+        return loginButton
     }
 }
