@@ -11,5 +11,4 @@ class MyApplication : Application() {
         super.onCreate()
         appComponent = DaggerAppComponent.factory().create(applicationContext)
     }
-
 }
