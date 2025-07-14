@@ -34,10 +34,12 @@ class LoginFragment : Fragment(), Contract.View {
         return loginFragment?.root
     }
 
-    override fun usernameEditText(): Observable<CharSequence>? = usernameText?.textChanges()
+    override fun usernameObservable(): Observable<CharSequence>? = usernameText?.textChanges()
 
-    override fun passwordEditText(): Observable<CharSequence>? = passwordText?.textChanges()
+    override fun passwordObservable(): Observable<CharSequence>? = passwordText?.textChanges()
 
-    override fun loginButton(): Observable<Unit>? = loginButton?.clicks()
+    override fun loginButtonObservable(): Observable<Unit>? = loginButton?.clicks()
+
+    override fun loginButton(): Button? = loginButton
 
 }

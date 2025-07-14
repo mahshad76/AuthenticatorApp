@@ -6,3 +6,8 @@ import javax.inject.Scope
 @MustBeDocumented
 @Retention(value = AnnotationRetention.RUNTIME)
 annotation class WelcomeActivityScope
+
+@Scope
+@MustBeDocumented
+@Retention(value = AnnotationRetention.RUNTIME)
+annotation class loginFragmentScope

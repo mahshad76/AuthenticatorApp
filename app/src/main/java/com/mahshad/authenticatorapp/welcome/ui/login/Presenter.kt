@@ -37,10 +37,11 @@ class Presenter @Inject constructor(
     }
 
     override fun loginValidationFlow(
+        usernameObservable: Observable<String>?,
+        passwordObservable: Observable<String>?
     ): Disposable? {
         return Observable.combineLatest(
-            processEditTextFlow(view?.usernameEditText()),
-            processEditTextFlow(view?.passwordEditText())
+            usernameObservable, passwordObservable
         ) { username: String, password: String ->
             isValidUsername(username) && isValidPassword(password)
         }
