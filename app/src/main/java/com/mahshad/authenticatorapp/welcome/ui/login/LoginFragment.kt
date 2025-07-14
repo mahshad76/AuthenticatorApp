@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.textChanges
 import com.mahshad.authenticatorapp.databinding.FragmentLoginBinding
 import io.reactivex.Observable
@@ -37,8 +38,6 @@ class LoginFragment : Fragment(), Contract.View {
 
     override fun passwordEditText(): Observable<CharSequence>? = passwordText?.textChanges()
 
+    override fun loginButton(): Observable<Unit>? = loginButton?.clicks()
 
-    override fun loginButton(): Button? {
-        return loginButton
-    }
 }
