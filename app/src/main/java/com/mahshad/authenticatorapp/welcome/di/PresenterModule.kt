@@ -8,6 +8,6 @@ import dagger.Module
 @Module
 abstract class PresenterModule {
     @Binds
-    @WelcomeActivityScope
+    @LoginFragmentScope
     abstract fun providePresenter(presenter: Presenter): Contract.Presenter
 }

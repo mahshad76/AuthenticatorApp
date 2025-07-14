@@ -10,4 +10,4 @@ annotation class WelcomeActivityScope
 @Scope
 @MustBeDocumented
 @Retention(value = AnnotationRetention.RUNTIME)
-annotation class loginFragmentScope
+annotation class LoginFragmentScope

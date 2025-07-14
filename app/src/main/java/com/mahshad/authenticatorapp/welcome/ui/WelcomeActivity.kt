@@ -5,15 +5,19 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.mahshad.authenticatorapp.MyApplication
 import com.mahshad.authenticatorapp.R
 import com.mahshad.authenticatorapp.common.AppCompatActivityExtensions.replaceFragment
 import com.mahshad.authenticatorapp.databinding.ActivityMainBinding
+import com.mahshad.authenticatorapp.welcome.di.WelcomeActivityComponent
 import com.mahshad.authenticatorapp.welcome.ui.login.LoginFragment
 
 class WelcomeActivity : AppCompatActivity() {
     private lateinit var activityHomeBinding: ActivityMainBinding
-
+    lateinit var activityComponent: WelcomeActivityComponent
     override fun onCreate(savedInstanceState: Bundle?) {
+        activityComponent = (application as MyApplication).appComponent.welcomeComponent().create()
+        activityComponent.inject(this)
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         activityHomeBinding = ActivityMainBinding.inflate(layoutInflater)

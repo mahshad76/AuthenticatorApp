@@ -1,5 +1,6 @@
 package com.mahshad.authenticatorapp.welcome.ui.login
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,10 @@ import androidx.fragment.app.Fragment
 import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.textChanges
 import com.mahshad.authenticatorapp.databinding.FragmentLoginBinding
+import com.mahshad.authenticatorapp.welcome.di.LoginFragmentComponent
+import com.mahshad.authenticatorapp.welcome.ui.WelcomeActivity
 import io.reactivex.Observable
+import javax.inject.Inject
 
 class LoginFragment : Fragment(), Contract.View {
 
@@ -18,9 +22,21 @@ class LoginFragment : Fragment(), Contract.View {
     private var usernameText: EditText? = null
     private var passwordText: EditText? = null
     private var loginButton: Button? = null
+    private lateinit var loginFragmentComponent: LoginFragmentComponent
+
+    @Inject
+    lateinit var presenter: Contract.Presenter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    }
+
+    override fun onAttach(context: Context) {
+        loginFragmentComponent =
+            (activity as WelcomeActivity).activityComponent.loginFragmentComponent().create()
+        loginFragmentComponent.inject(this)
+        super.onAttach(context)
     }
 
     override fun onCreateView(

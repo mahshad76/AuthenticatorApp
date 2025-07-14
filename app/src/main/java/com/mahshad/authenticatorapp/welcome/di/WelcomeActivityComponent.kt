@@ -12,4 +12,6 @@ interface WelcomeActivityComponent {
     }
 
     fun inject(welcomeActivity: WelcomeActivity)
+
+    fun loginFragmentComponent(): LoginFragmentComponent.Factory
 }

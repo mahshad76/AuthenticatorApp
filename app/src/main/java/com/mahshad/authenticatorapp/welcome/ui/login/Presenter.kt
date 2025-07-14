@@ -1,5 +1,7 @@
 package com.mahshad.authenticatorapp.welcome.ui.login
 
+import com.mahshad.authenticatorapp.di.IoScheduler
+import com.mahshad.authenticatorapp.di.MainScheduler
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.disposables.Disposable
@@ -7,8 +9,8 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class Presenter @Inject constructor(
-    private val ioScheduler: Scheduler,
-    private val mainScheduler: Scheduler
+    @IoScheduler private val ioScheduler: Scheduler,
+    @MainScheduler private val mainScheduler: Scheduler
 ) :
     Contract.Presenter {
     private var view: Contract.View? = null
