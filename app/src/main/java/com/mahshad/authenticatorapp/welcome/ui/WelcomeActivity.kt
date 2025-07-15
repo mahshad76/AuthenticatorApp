@@ -9,14 +9,14 @@ import com.mahshad.authenticatorapp.MyApplication
 import com.mahshad.authenticatorapp.R
 import com.mahshad.authenticatorapp.common.AppCompatActivityExtensions.replaceFragment
 import com.mahshad.authenticatorapp.databinding.ActivityMainBinding
-import com.mahshad.authenticatorapp.welcome.di.WelcomeActivityComponent
+import com.mahshad.authenticatorapp.di.AppComponent
 import com.mahshad.authenticatorapp.welcome.ui.login.LoginFragment
 
 class WelcomeActivity : AppCompatActivity() {
     private lateinit var activityHomeBinding: ActivityMainBinding
-    lateinit var activityComponent: WelcomeActivityComponent
+    lateinit var activityComponent: AppComponent
     override fun onCreate(savedInstanceState: Bundle?) {
-        activityComponent = (application as MyApplication).appComponent.welcomeComponent().create()
+        activityComponent = (application as MyApplication).appComponent
         activityComponent.inject(this)
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

@@ -73,5 +73,6 @@
         android:textColor="@android:color/white"
         android:textSize="20sp"
         app:backgroundTint="@null"
-        app:rippleColor="#80FFFFFF" />
+        app:rippleColor="#80FFFFFF"
+        android:enabled="false"/>
 </LinearLayout>

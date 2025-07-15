@@ -10,9 +10,9 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.textChanges
+import com.mahshad.authenticatorapp.MyApplication
 import com.mahshad.authenticatorapp.databinding.FragmentLoginBinding
-import com.mahshad.authenticatorapp.welcome.di.LoginFragmentComponent
-import com.mahshad.authenticatorapp.welcome.ui.WelcomeActivity
+import com.mahshad.authenticatorapp.di.AppComponent
 import io.reactivex.Observable
 import javax.inject.Inject
 
@@ -22,7 +22,9 @@ class LoginFragment : Fragment(), Contract.View {
     private var usernameText: EditText? = null
     private var passwordText: EditText? = null
     private var loginButton: Button? = null
-    private lateinit var loginFragmentComponent: LoginFragmentComponent
+    private var usernameObservable: Observable<CharSequence>? = null
+    private var passwordObservable: Observable<CharSequence>? = null
+    private lateinit var loginFragmentComponent: AppComponent
 
     @Inject
     lateinit var presenter: Contract.Presenter
@@ -34,7 +36,7 @@ class LoginFragment : Fragment(), Contract.View {
 
     override fun onAttach(context: Context) {
         loginFragmentComponent =
-            (activity as WelcomeActivity).activityComponent.loginFragmentComponent().create()
+        (requireActivity().application as MyApplication).appComponent
         loginFragmentComponent.inject(this)
         super.onAttach(context)
     }
@@ -47,7 +49,22 @@ class LoginFragment : Fragment(), Contract.View {
         usernameText = loginFragment?.usernameEditText
         passwordText = loginFragment?.passwordEditText
         loginButton = loginFragment?.myGradientMaterialButton
+        usernameObservable = usernameText?.textChanges()
+        passwordObservable = passwordText?.textChanges()
+        presenter.loginValidationFlow(usernameObservable,passwordObservable)
         return loginFragment?.root
+    }
+
+    override fun setLoginButtonEnabled(isEnabled: Boolean) {
+        TODO("Not yet implemented")
+    }
+
+    override fun showLoginSuccess() {
+        TODO("Not yet implemented")
+    }
+
+    override fun showLoginError() {
+        TODO("Not yet implemented")
     }
 
     override fun usernameObservable(): Observable<CharSequence>? = usernameText?.textChanges()

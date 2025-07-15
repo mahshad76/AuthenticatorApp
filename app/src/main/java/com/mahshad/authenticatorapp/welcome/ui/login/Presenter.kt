@@ -1,5 +1,6 @@
 package com.mahshad.authenticatorapp.welcome.ui.login
 
+import android.util.Log
 import com.mahshad.authenticatorapp.di.IoScheduler
 import com.mahshad.authenticatorapp.di.MainScheduler
 import io.reactivex.Observable
@@ -7,7 +8,9 @@ import io.reactivex.Scheduler
 import io.reactivex.disposables.Disposable
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class Presenter @Inject constructor(
     @IoScheduler private val ioScheduler: Scheduler,
     @MainScheduler private val mainScheduler: Scheduler
@@ -39,25 +42,28 @@ class Presenter @Inject constructor(
     }
 
     override fun loginValidationFlow(
-        usernameObservable: Observable<String>?,
-        passwordObservable: Observable<String>?
+        usernameObservable: Observable<CharSequence>?,
+        passwordObservable: Observable<CharSequence>?
     ): Disposable? {
         return Observable.combineLatest(
             usernameObservable, passwordObservable
-        ) { username: String, password: String ->
+        ) { username: CharSequence, password: CharSequence ->
             isValidUsername(username) && isValidPassword(password)
         }
             .distinct()
             .observeOn(ioScheduler)
             .subscribeOn(mainScheduler)
-            .subscribe({ isEnabled -> view?.loginButton()?.isEnabled = isEnabled }
+            .subscribe({ isEnabled ->
+                ///view?.loginButton()?.isEnabled = isEnabled
+                Log.d("texts are changing", "loginValidationFlow: ${isEnabled} ")
+            }
             )
     }
 
-    fun isValidUsername(username: String): Boolean =
+    fun isValidUsername(username: CharSequence): Boolean =
         username.length > 3 && !username.isEmpty()
 
-    fun isValidPassword(password: String): Boolean =
+    fun isValidPassword(password: CharSequence): Boolean =
         password.isNotBlank() && password.length >= 6
 
     override fun loginButtonListener() {

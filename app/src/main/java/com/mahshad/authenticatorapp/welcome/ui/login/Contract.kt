@@ -8,14 +8,13 @@ import io.reactivex.disposables.Disposable
 
 interface Contract {
     interface View : BaseView {
+        fun setLoginButtonEnabled(isEnabled: Boolean)
+        fun showLoginSuccess()
+        fun showLoginError()
         fun usernameObservable(): Observable<CharSequence>?
         fun passwordObservable(): Observable<CharSequence>?
         fun loginButtonObservable(): Observable<Unit>?
         fun loginButton(): Button?
-//        fun showLoading()
-//        fun hideLoading()
-//        fun successfulMessage()
-//        fun unSuccessfulMessage()
     }
 
     /**
@@ -25,8 +24,8 @@ interface Contract {
     interface Presenter : BasePresenter<Contract.View> {
         fun processEditTextFlow(editTextObservable: Observable<CharSequence>?): Observable<String>?
         fun loginValidationFlow(
-            usernameObservable: Observable<String>?,
-            passwordObservable: Observable<String>?
+            usernameObservable: Observable<CharSequence>?,
+            passwordObservable: Observable<CharSequence>?
         ): Disposable?
 
         fun loginButtonListener()

@@ -4,10 +4,11 @@ import com.mahshad.authenticatorapp.welcome.ui.login.Contract
 import com.mahshad.authenticatorapp.welcome.ui.login.Presenter
 import dagger.Binds
 import dagger.Module
+import javax.inject.Singleton
 
 @Module
 abstract class PresenterModule {
     @Binds
-    @LoginFragmentScope
+    @Singleton
     abstract fun providePresenter(presenter: Presenter): Contract.Presenter
 }
