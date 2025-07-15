@@ -36,7 +36,6 @@ class Presenter @Inject constructor(
             it?.skip(1)
                 ?.debounce(300, TimeUnit.MILLISECONDS)
                 ?.map { it.toString() }
-                ?.distinct()
                 ?.observeOn(ioScheduler)
         }
     }
@@ -46,17 +45,18 @@ class Presenter @Inject constructor(
         passwordObservable: Observable<CharSequence>?
     ): Disposable? {
         return Observable.combineLatest(
-            usernameObservable, passwordObservable
-        ) { username: CharSequence, password: CharSequence ->
+            processEditTextFlow(usernameObservable),
+            processEditTextFlow(passwordObservable)
+        ) { username: String, password: String ->
             isValidUsername(username) && isValidPassword(password)
         }
-            .distinct()
+            .distinctUntilChanged()
             .observeOn(ioScheduler)
             .subscribeOn(mainScheduler)
             .subscribe({ isEnabled ->
-                ///view?.loginButton()?.isEnabled = isEnabled
-                Log.d("texts are changing", "loginValidationFlow: ${isEnabled} ")
-            }
+                view?.setLoginButtonEnabled(isEnabled)
+                Log.d("loginValidationFlow", "loginValidationFlow: ${isEnabled} ")
+            }, {error: Throwable->"loginValidationFlowError:${error}"}
             )
     }
 
@@ -65,8 +65,4 @@ class Presenter @Inject constructor(
 
     fun isValidPassword(password: CharSequence): Boolean =
         password.isNotBlank() && password.length >= 6
-
-    override fun loginButtonListener() {
-        // view?.observableLoginButton()
-    }
 }

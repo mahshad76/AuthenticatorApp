@@ -1,6 +1,5 @@
 package com.mahshad.authenticatorapp.welcome.ui.login
 
-import android.widget.Button
 import com.mahshad.authenticatorapp.common.BasePresenter
 import com.mahshad.authenticatorapp.common.BaseView
 import io.reactivex.Observable
@@ -11,10 +10,6 @@ interface Contract {
         fun setLoginButtonEnabled(isEnabled: Boolean)
         fun showLoginSuccess()
         fun showLoginError()
-        fun usernameObservable(): Observable<CharSequence>?
-        fun passwordObservable(): Observable<CharSequence>?
-        fun loginButtonObservable(): Observable<Unit>?
-        fun loginButton(): Button?
     }
 
     /**
@@ -27,7 +22,5 @@ interface Contract {
             usernameObservable: Observable<CharSequence>?,
             passwordObservable: Observable<CharSequence>?
         ): Disposable?
-
-        fun loginButtonListener()
     }
 }
