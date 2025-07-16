@@ -59,14 +59,6 @@ class LoginFragment : Fragment(), Contract.View {
     override fun setLoginButtonEnabled(isEnabled: Boolean) {
         Log.d("TAG", "setLoginButtonEnabled")
         loginButton?.isEnabled = isEnabled
-//        val blackColorInt = ContextCompat.getColor(requireContext(), R.color.black)
-//        val whiteColorInt = ContextCompat.getColor(requireContext(), R.color.white)
-//        val blackTextColorStateList = ColorStateList.valueOf(blackColorInt)
-//        val whiteTextColorStateList = ColorStateList.valueOf(whiteColorInt)
-//        loginButton?.setTextColor(blackTextColorStateList)
-//        //}
-//        //loginButton?.setBackgroundResource(R.drawable.gray_gradient_rectangle)
-//        //loginButton?.backgroundTintList = null
     }
 
     override fun showLoginSuccess() {
