@@ -31,13 +31,12 @@ class Presenter @Inject constructor(
     }
 
     override fun processEditTextFlow(editTextObservable: Observable<CharSequence>?):
-            Observable<String>? {
+            Observable<String> {
         return editTextObservable.let {
             it?.skip(1)
                 ?.debounce(300, TimeUnit.MILLISECONDS)
                 ?.map { it.toString() }
-                ?.observeOn(ioScheduler)
-        }
+        } ?: Observable.just("")
     }
 
     override fun loginValidationFlow(
@@ -51,18 +50,18 @@ class Presenter @Inject constructor(
             isValidUsername(username) && isValidPassword(password)
         }
             .distinctUntilChanged()
-            .observeOn(ioScheduler)
-            .subscribeOn(mainScheduler)
+            .subscribeOn(ioScheduler)
+            .observeOn(mainScheduler)
             .subscribe({ isEnabled ->
                 view?.setLoginButtonEnabled(isEnabled)
                 Log.d("loginValidationFlow", "loginValidationFlow: ${isEnabled} ")
-            }, {error: Throwable->"loginValidationFlowError:${error}"}
+            }, { error: Throwable -> "loginValidationFlowError:${error}" }
             )
     }
 
-    fun isValidUsername(username: CharSequence): Boolean =
-        username.length > 3 && !username.isEmpty()
+    fun isValidUsername(username: String): Boolean =
+        !username.isEmpty() && username.length > 7
 
-    fun isValidPassword(password: CharSequence): Boolean =
-        password.isNotBlank() && password.length >= 6
+    fun isValidPassword(password: String): Boolean =
+        !password.isEmpty() && password.length > 7
 }
