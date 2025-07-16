@@ -10,9 +10,8 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.jakewharton.rxbinding3.widget.textChanges
-import com.mahshad.authenticatorapp.MyApplication
 import com.mahshad.authenticatorapp.databinding.FragmentLoginBinding
-import com.mahshad.authenticatorapp.di.AppComponent
+import dagger.android.support.AndroidSupportInjection
 import io.reactivex.Observable
 import javax.inject.Inject
 
@@ -24,20 +23,16 @@ class LoginFragment : Fragment(), Contract.View {
     private var loginButton: Button? = null
     private var usernameObservable: Observable<CharSequence>? = null
     private var passwordObservable: Observable<CharSequence>? = null
-    private lateinit var loginFragmentComponent: AppComponent
 
     @Inject
     lateinit var presenter: Contract.Presenter
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
     override fun onAttach(context: Context) {
-        loginFragmentComponent =
-            (requireActivity().application as MyApplication).appComponent
-        loginFragmentComponent.inject(this)
+        AndroidSupportInjection.inject(this)
         super.onAttach(context)
     }
 

@@ -1,9 +1,10 @@
 package com.mahshad.authenticatorapp.di
 
 import android.content.Context
+import com.mahshad.authenticatorapp.MyApplication
+import com.mahshad.authenticatorapp.welcome.di.ActivityBuildersModule
+import com.mahshad.authenticatorapp.welcome.di.FragmentBuildersModule
 import com.mahshad.authenticatorapp.welcome.di.PresenterModule
-import com.mahshad.authenticatorapp.welcome.ui.WelcomeActivity
-import com.mahshad.authenticatorapp.welcome.ui.login.LoginFragment
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
@@ -13,8 +14,11 @@ import javax.inject.Singleton
 @Component(
     modules = [
         ThreadingModule::class,
-        PresenterModule::class,
-        AndroidSupportInjectionModule::class]
+        AndroidSupportInjectionModule::class,
+        ActivityBuildersModule::class,
+        FragmentBuildersModule::class,
+        PresenterModule::class
+    ]
 )
 interface AppComponent {
     @Component.Factory
@@ -22,11 +26,5 @@ interface AppComponent {
         fun create(@BindsInstance context: Context): AppComponent
     }
 
-    /**
-     * Provides a builder for the [WelcomeActivityComponent] to be created
-     * as a subcomponent of [AppComponent].
-     */
-    //fun welcomeComponent(): WelcomeActivityComponent.Factory
-    fun inject(activity: WelcomeActivity)
-    fun inject(fragment: LoginFragment)
+    fun inject(application: MyApplication)
 }
