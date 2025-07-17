@@ -32,20 +32,20 @@ class Presenter @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override fun processEditTextFlow(editTextObservable: Observable<CharSequence>?):
+    override fun processEditTextFlow(editTextObservable: Observable<CharSequence>):
             Observable<String> {
         return editTextObservable.let {
-            it?.skip(1)
-                ?.debounce(300, TimeUnit.MILLISECONDS)
-                ?.map { it.toString() }
-        } ?: Observable.just("")
+            it.skip(1)
+                .debounce(300, TimeUnit.MILLISECONDS)
+                .map { it.toString() }
+        }
     }
 
     //you need to add the subscriptions to the disposable array to clear them as the view is destroyed.
 
     override fun loginValidationFlow(
-        usernameObservable: Observable<CharSequence>?,
-        passwordObservable: Observable<CharSequence>?
+        usernameObservable: Observable<CharSequence>,
+        passwordObservable: Observable<CharSequence>
     ): Disposable? {
         return Observable.combineLatest(
             processEditTextFlow(usernameObservable),
@@ -63,19 +63,19 @@ class Presenter @Inject constructor(
             )
     }
 
-    override fun loginCheck(buttonObservable: Observable<Unit>?) {
+    override fun loginCheck(buttonObservable: Observable<Unit>) {
         buttonObservable
-            ?.throttleFirst(500, TimeUnit.MILLISECONDS)
-            ?.observeOn(ioScheduler)
-            ?.map {
+            .throttleFirst(500, TimeUnit.MILLISECONDS)
+            .observeOn(ioScheduler)
+            .map {
                 val username = view?.getUsername() ?: ""
                 val password = view?.getPassword() ?: ""
                 userSharedPref.readPassword() == username &&
                         userSharedPref.readPassword() == password
             }
-            ?.filter { !it }
-            ?.observeOn(mainScheduler)
-            ?.subscribe(
+            .filter { !it }
+            .observeOn(mainScheduler)
+            .subscribe(
                 { view?.showLoginError() },
                 { error: Throwable ->
                     Log.e("loginCheckError", "loginCheck: ${error.message}", error)

@@ -2,6 +2,8 @@ package com.mahshad.authenticatorapp.welcome.di
 
 import com.mahshad.authenticatorapp.welcome.ui.login.Contract
 import com.mahshad.authenticatorapp.welcome.ui.login.Presenter
+import com.mahshad.authenticatorapp.welcome.ui.signup.SignUpContract
+import com.mahshad.authenticatorapp.welcome.ui.signup.SignUpPresenter
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton
@@ -11,4 +13,8 @@ abstract class PresenterModule {
     @Binds
     @Singleton
     abstract fun providePresenter(presenter: Presenter): Contract.Presenter
+
+    @Binds
+    @Singleton
+    abstract fun provideSignUpPresenter(presenter: SignUpPresenter): SignUpContract.SignUpPresenter
 }

@@ -52,7 +52,7 @@ class LoginFragment : Fragment(), Contract.View {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         loginFragment = FragmentLoginBinding.inflate(inflater)
         usernameText = loginFragment.usernameEditText
         passwordText = loginFragment.passwordEditText
@@ -64,7 +64,7 @@ class LoginFragment : Fragment(), Contract.View {
             )
         }
         forgetPassText = loginFragment.forgetPassword
-        forgetPassText?.setOnClickListener {
+        forgetPassText.setOnClickListener {
             (activity as AppCompatActivity).replaceFragment(
                 R.id.fragment_container, ForgetPasswordFragment()
             )

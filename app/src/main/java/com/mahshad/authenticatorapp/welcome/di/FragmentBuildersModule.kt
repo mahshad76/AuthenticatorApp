@@ -1,6 +1,7 @@
 package com.mahshad.authenticatorapp.welcome.di
 
 import com.mahshad.authenticatorapp.welcome.ui.login.LoginFragment
+import com.mahshad.authenticatorapp.welcome.ui.signup.SignUpFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -8,4 +9,6 @@ import dagger.android.ContributesAndroidInjector
 abstract class FragmentBuildersModule {
     @ContributesAndroidInjector
     abstract fun contributeLoginFragment(): LoginFragment
+    @ContributesAndroidInjector
+    abstract fun contributeSignUpFragment(): SignUpFragment
 }
