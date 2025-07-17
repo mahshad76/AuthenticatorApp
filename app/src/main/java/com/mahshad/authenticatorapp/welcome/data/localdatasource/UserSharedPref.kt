@@ -1,8 +1,8 @@
 package com.mahshad.authenticatorapp.welcome.data.localdatasource
 
 interface UserSharedPref {
-    fun readUsername()
-    fun readPassword()
-    fun saveUsername()
-    fun savePassword()
+    fun readUsername(): String?
+    fun readPassword(): String?
+    fun saveUsername(username: String)
+    fun savePassword(password: String)
 }
