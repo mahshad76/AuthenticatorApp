@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.jakewharton.rxbinding3.widget.textChanges
 import com.mahshad.authenticatorapp.databinding.FragmentLoginBinding
@@ -23,6 +24,8 @@ class LoginFragment : Fragment(), Contract.View {
     private var loginButton: Button? = null
     private var usernameObservable: Observable<CharSequence>? = null
     private var passwordObservable: Observable<CharSequence>? = null
+    private var loginButtonObservable: Observable<Unit>? = null
+    private lateinit var myContext: Context
 
     @Inject
     lateinit var presenter: Contract.Presenter
@@ -34,6 +37,7 @@ class LoginFragment : Fragment(), Contract.View {
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
+        myContext = context
     }
 
     override fun onCreateView(
@@ -56,11 +60,8 @@ class LoginFragment : Fragment(), Contract.View {
         loginButton?.isEnabled = isEnabled
     }
 
-    override fun showLoginSuccess() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showLoginError() {
-        TODO("Not yet implemented")
-    }
+    override fun showLoginError() = Toast.makeText(
+        myContext, "Invalid Username or Password",
+        Toast.LENGTH_SHORT
+    ).show()
 }

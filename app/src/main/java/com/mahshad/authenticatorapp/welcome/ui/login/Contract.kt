@@ -8,7 +8,6 @@ import io.reactivex.disposables.Disposable
 interface Contract {
     interface View : BaseView {
         fun setLoginButtonEnabled(isEnabled: Boolean)
-        fun showLoginSuccess()
         fun showLoginError()
     }
 
