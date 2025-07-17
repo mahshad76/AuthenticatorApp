@@ -66,16 +66,15 @@ class Presenter @Inject constructor(
             ?.throttleFirst(500, TimeUnit.MILLISECONDS)
             ?.observeOn(ioScheduler)
             ?.map {
-                userSharedPref.readPassword() == view?.getUsername() &&
-                        userSharedPref.readPassword() == view?.getPassword()
+                val username = view?.getUsername() ?: ""
+                val password = view?.getPassword() ?: ""
+                userSharedPref.readPassword() == username &&
+                        userSharedPref.readPassword() == password
             }
+            ?.filter { !it }
             ?.observeOn(mainScheduler)
             ?.subscribe(
-                { isValid: Boolean ->
-                    if (!isValid) {
-                        view?.showLoginError()
-                    }
-                },
+                { view?.showLoginError() },
                 { error: Throwable ->
                     Log.e("loginCheckError", "loginCheck: ${error.message}", error)
                 }
