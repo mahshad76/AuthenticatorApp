@@ -3,6 +3,7 @@ package com.mahshad.authenticatorapp.welcome.ui.login
 import android.util.Log
 import com.mahshad.authenticatorapp.di.IoScheduler
 import com.mahshad.authenticatorapp.di.MainScheduler
+import com.mahshad.authenticatorapp.welcome.data.localdatasource.UserSharedPref
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.disposables.Disposable
@@ -13,7 +14,8 @@ import javax.inject.Singleton
 @Singleton
 class Presenter @Inject constructor(
     @IoScheduler private val ioScheduler: Scheduler,
-    @MainScheduler private val mainScheduler: Scheduler
+    @MainScheduler private val mainScheduler: Scheduler,
+    private val userSharedPref: UserSharedPref
 ) :
     Contract.Presenter {
     private var view: Contract.View? = null
@@ -56,6 +58,27 @@ class Presenter @Inject constructor(
                 view?.setLoginButtonEnabled(isEnabled)
                 Log.d("loginValidationFlow", "loginValidationFlow: ${isEnabled} ")
             }, { error: Throwable -> "loginValidationFlowError:${error}" }
+            )
+    }
+
+    override fun loginCheck(buttonObservable: Observable<Unit>?) {
+        buttonObservable
+            ?.throttleFirst(500, TimeUnit.MILLISECONDS)
+            ?.observeOn(ioScheduler)
+            ?.map {
+                userSharedPref.readPassword() == view?.getUsername() &&
+                        userSharedPref.readPassword() == view?.getPassword()
+            }
+            ?.observeOn(mainScheduler)
+            ?.subscribe(
+                { isValid: Boolean ->
+                    if (!isValid) {
+                        view?.showLoginError()
+                    }
+                },
+                { error: Throwable ->
+                    Log.e("loginCheckError", "loginCheck: ${error.message}", error)
+                }
             )
     }
 

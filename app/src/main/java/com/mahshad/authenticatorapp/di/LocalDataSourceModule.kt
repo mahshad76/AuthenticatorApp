@@ -2,8 +2,8 @@ package com.mahshad.authenticatorapp.di
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.mahshad.authenticatorapp.data.local.UserSharedPref
-import com.mahshad.authenticatorapp.data.local.UserSharedPrefImpl
+import com.mahshad.authenticatorapp.welcome.data.localdatasource.UserSharedPref
+import com.mahshad.authenticatorapp.welcome.data.localdatasource.UserSharedPrefImpl
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

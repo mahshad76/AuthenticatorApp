@@ -9,6 +9,10 @@ interface Contract {
     interface View : BaseView {
         fun setLoginButtonEnabled(isEnabled: Boolean)
         fun showLoginError()
+        fun getUsername(): String?
+        fun getPassword(): String?
+
+
     }
 
     /**
@@ -21,5 +25,7 @@ interface Contract {
             usernameObservable: Observable<CharSequence>?,
             passwordObservable: Observable<CharSequence>?
         ): Disposable?
+
+        fun loginCheck(buttonObservable: Observable<Unit>?)
     }
 }

@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.textChanges
 import com.mahshad.authenticatorapp.databinding.FragmentLoginBinding
 import dagger.android.support.AndroidSupportInjection
@@ -50,8 +51,10 @@ class LoginFragment : Fragment(), Contract.View {
         loginButton = loginFragment?.myGradientMaterialButton
         usernameObservable = usernameText?.textChanges()
         passwordObservable = passwordText?.textChanges()
+        loginButtonObservable = loginButton?.clicks()
         presenter.attachView(this)
         presenter.loginValidationFlow(usernameObservable, passwordObservable)
+        presenter.loginCheck(loginButtonObservable)
         return loginFragment?.root
     }
 
@@ -64,4 +67,8 @@ class LoginFragment : Fragment(), Contract.View {
         myContext, "Invalid Username or Password",
         Toast.LENGTH_SHORT
     ).show()
+
+    override fun getUsername() = usernameText?.text.toString()
+
+    override fun getPassword() = passwordText?.text.toString()
 }
