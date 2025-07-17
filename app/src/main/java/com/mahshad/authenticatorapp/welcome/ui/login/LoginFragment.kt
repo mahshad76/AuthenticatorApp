@@ -8,24 +8,32 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.textChanges
+import com.mahshad.authenticatorapp.R
+import com.mahshad.authenticatorapp.common.AppCompatActivityExtensions.replaceFragment
 import com.mahshad.authenticatorapp.databinding.FragmentLoginBinding
+import com.mahshad.authenticatorapp.welcome.ui.forgetpassword.ForgetPasswordFragment
+import com.mahshad.authenticatorapp.welcome.ui.signup.SignUpFragment
 import dagger.android.support.AndroidSupportInjection
 import io.reactivex.Observable
 import javax.inject.Inject
 
 class LoginFragment : Fragment(), Contract.View {
 
-    private var loginFragment: FragmentLoginBinding? = null
-    private var usernameText: EditText? = null
-    private var passwordText: EditText? = null
-    private var loginButton: Button? = null
-    private var usernameObservable: Observable<CharSequence>? = null
-    private var passwordObservable: Observable<CharSequence>? = null
-    private var loginButtonObservable: Observable<Unit>? = null
+    private lateinit var loginFragment: FragmentLoginBinding
+    private lateinit var usernameText: EditText
+    private lateinit var passwordText: EditText
+    private lateinit var loginButton: Button
+    private lateinit var signupText: TextView
+    private lateinit var forgetPassText: TextView
+    private lateinit var usernameObservable: Observable<CharSequence>
+    private lateinit var passwordObservable: Observable<CharSequence>
+    private lateinit var loginButtonObservable: Observable<Unit>
     private lateinit var myContext: Context
 
     @Inject
@@ -46,21 +54,33 @@ class LoginFragment : Fragment(), Contract.View {
         savedInstanceState: Bundle?
     ): View? {
         loginFragment = FragmentLoginBinding.inflate(inflater)
-        usernameText = loginFragment?.usernameEditText
-        passwordText = loginFragment?.passwordEditText
-        loginButton = loginFragment?.myGradientMaterialButton
-        usernameObservable = usernameText?.textChanges()
-        passwordObservable = passwordText?.textChanges()
-        loginButtonObservable = loginButton?.clicks()
+        usernameText = loginFragment.usernameEditText
+        passwordText = loginFragment.passwordEditText
+        loginButton = loginFragment.myGradientMaterialButton
+        signupText = loginFragment.registrationText
+        signupText.setOnClickListener {
+            (activity as AppCompatActivity).replaceFragment(
+                R.id.fragment_container, SignUpFragment()
+            )
+        }
+        forgetPassText = loginFragment.forgetPassword
+        forgetPassText?.setOnClickListener {
+            (activity as AppCompatActivity).replaceFragment(
+                R.id.fragment_container, ForgetPasswordFragment()
+            )
+        }
+        usernameObservable = usernameText.textChanges()
+        passwordObservable = passwordText.textChanges()
+        loginButtonObservable = loginButton.clicks()
         presenter.attachView(this)
         presenter.loginValidationFlow(usernameObservable, passwordObservable)
         presenter.loginCheck(loginButtonObservable)
-        return loginFragment?.root
+        return loginFragment.root
     }
 
     override fun setLoginButtonEnabled(isEnabled: Boolean) {
         Log.d("TAG", "setLoginButtonEnabled")
-        loginButton?.isEnabled = isEnabled
+        loginButton.isEnabled = isEnabled
     }
 
     override fun showLoginError() = Toast.makeText(
@@ -68,7 +88,7 @@ class LoginFragment : Fragment(), Contract.View {
         Toast.LENGTH_SHORT
     ).show()
 
-    override fun getUsername() = usernameText?.text.toString()
+    override fun getUsername() = usernameText.text.toString()
 
-    override fun getPassword() = passwordText?.text.toString()
+    override fun getPassword() = passwordText.text.toString()
 }
