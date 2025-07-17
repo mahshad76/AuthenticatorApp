@@ -41,6 +41,8 @@ class Presenter @Inject constructor(
         } ?: Observable.just("")
     }
 
+    //you need to add the subscriptions to the disposable array to clear them as the view is destroyed.
+
     override fun loginValidationFlow(
         usernameObservable: Observable<CharSequence>?,
         passwordObservable: Observable<CharSequence>?
