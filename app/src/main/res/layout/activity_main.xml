@@ -58,7 +58,7 @@
         android:id="@+id/bottom_curve"
         android:layout_width="0dp"
         android:layout_height="150dp"
-        android:layout_marginBottom="-100dp"
+        android:layout_marginBottom="-130dp"
         android:background="@drawable/blue_gradient_circle_bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
