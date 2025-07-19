@@ -57,7 +57,15 @@ class SignUpFragment : Fragment(), SignUpContract.SignUpView {
         signUpButton = signUpFragment.myGradientMaterialButton
         signUpButtonObservable = signUpButton.clicks()
         presenter.attachView(this)
+        presenter.signUpValidationFlow(
+            usernameEditTextObservable, fullNameEditTextObservable,
+            passwordEditTextObservable, phoneEditTextObservable
+        )
         return signUpFragment.root
+    }
+
+    override fun setSignUpButtonEnabled(isEnabled: Boolean) {
+        signUpButton.isEnabled = isEnabled
     }
 
     override fun showSuccessfulSignup() {}

@@ -1,5 +1,6 @@
 package com.mahshad.authenticatorapp.welcome.ui.signup
 
+import com.mahshad.authenticatorapp.common.BasePresenterExtensions.processEditTextFlow
 import com.mahshad.authenticatorapp.di.IoScheduler
 import com.mahshad.authenticatorapp.di.MainScheduler
 import com.mahshad.authenticatorapp.welcome.data.localdatasource.UserSharedPref
@@ -23,7 +24,16 @@ class SignUpPresenter @Inject constructor(
         passwordObservable: Observable<CharSequence>,
         phoneObservable: Observable<CharSequence>
     ) {
-        TODO("Not yet implemented")
+        Observable.combineLatest(
+            processEditTextFlow(usernameObservable),
+            processEditTextFlow(fullNameObservable),
+            processEditTextFlow(passwordObservable),
+            processEditTextFlow(phoneObservable)
+        ) { username: String, fullName: String, password: String, phone: String ->
+            username.length > 7 && fullName.length > 6 && password.length > 7 && phone.length == 10
+        }.subscribeOn(ioScheduler).observeOn(mainScheduler).subscribe { isValid: Boolean ->
+            view?.setSignUpButtonEnabled(isValid)
+        }
     }
 
     override fun attachView(view: SignUpContract.SignUpView) {

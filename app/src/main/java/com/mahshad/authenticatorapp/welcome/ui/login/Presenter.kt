@@ -1,6 +1,7 @@
 package com.mahshad.authenticatorapp.welcome.ui.login
 
 import android.util.Log
+import com.mahshad.authenticatorapp.common.BasePresenterExtensions.processEditTextFlow
 import com.mahshad.authenticatorapp.di.IoScheduler
 import com.mahshad.authenticatorapp.di.MainScheduler
 import com.mahshad.authenticatorapp.welcome.data.localdatasource.UserSharedPref
@@ -31,16 +32,6 @@ class Presenter @Inject constructor(
     override fun destroyView() {
         TODO("Not yet implemented")
     }
-
-    override fun processEditTextFlow(editTextObservable: Observable<CharSequence>):
-            Observable<String> {
-        return editTextObservable.let {
-            it.skip(1)
-                .debounce(300, TimeUnit.MILLISECONDS)
-                .map { it.toString() }
-        }
-    }
-
     //you need to add the subscriptions to the disposable array to clear them as the view is destroyed.
 
     override fun loginValidationFlow(
@@ -51,7 +42,7 @@ class Presenter @Inject constructor(
             processEditTextFlow(usernameObservable),
             processEditTextFlow(passwordObservable)
         ) { username: String, password: String ->
-            isValidUsername(username) && isValidPassword(password)
+            username.length > 7 && password.length > 7
         }
             .distinctUntilChanged()
             .subscribeOn(ioScheduler)
@@ -82,10 +73,4 @@ class Presenter @Inject constructor(
                 }
             )
     }
-
-    fun isValidUsername(username: String): Boolean =
-        !username.isEmpty() && username.length > 7
-
-    fun isValidPassword(password: String): Boolean =
-        !password.isEmpty() && password.length > 7
 }

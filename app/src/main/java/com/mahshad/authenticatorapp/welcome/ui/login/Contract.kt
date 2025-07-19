@@ -20,7 +20,6 @@ interface Contract {
      * Interactions with the views are converted into observables via the RxBinding library.
      */
     interface Presenter : BasePresenter<Contract.View> {
-        fun processEditTextFlow(editTextObservable: Observable<CharSequence>): Observable<String>
         fun loginValidationFlow(
             usernameObservable: Observable<CharSequence>,
             passwordObservable: Observable<CharSequence>

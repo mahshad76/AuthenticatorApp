@@ -6,6 +6,7 @@ import io.reactivex.Observable
 
 interface SignUpContract {
     interface SignUpView : BaseView {
+        fun setSignUpButtonEnabled(isEnabled: Boolean)
         fun showSuccessfulSignup()
         fun unsuccessfulSignUp()
     }
