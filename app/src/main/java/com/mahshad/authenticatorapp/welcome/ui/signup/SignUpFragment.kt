@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.textChanges
@@ -28,12 +29,14 @@ class SignUpFragment : Fragment(), SignUpContract.SignUpView {
     private lateinit var phoneEditTextObservable: Observable<CharSequence>
     private lateinit var signUpButton: Button
     private lateinit var signUpButtonObservable: Observable<Unit>
+    private lateinit var myContext: Context
 
     @Inject
     lateinit var presenter: SignUpContract.SignUpPresenter
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
+        myContext = context
         super.onAttach(context)
     }
 
@@ -61,6 +64,12 @@ class SignUpFragment : Fragment(), SignUpContract.SignUpView {
             usernameEditTextObservable, fullNameEditTextObservable,
             passwordEditTextObservable, phoneEditTextObservable
         )
+        presenter.signUpCheck(
+            buttonObservable = signUpButtonObservable,
+            getUsername = { usernameEditText.text.toString() },
+            getFullName = { fullNameEditText.text.toString() },
+            getPassword = { passwordEditText.text.toString() },
+            getPhone = { phoneEditText.text.toString() })
         return signUpFragment.root
     }
 
@@ -68,6 +77,17 @@ class SignUpFragment : Fragment(), SignUpContract.SignUpView {
         signUpButton.isEnabled = isEnabled
     }
 
-    override fun showSuccessfulSignup() {}
-    override fun unsuccessfulSignUp() {}
+    override fun showSuccessfulSignup() {
+        Toast.makeText(
+            myContext, "Successful signup",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    override fun unsuccessfulSignUp() {
+        Toast.makeText(
+            myContext, "The user already exists",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
 }

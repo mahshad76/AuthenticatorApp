@@ -18,5 +18,13 @@ interface SignUpContract {
             passwordObservable: Observable<CharSequence>,
             phoneObservable: Observable<CharSequence>
         )
+
+        fun signUpCheck(
+            buttonObservable: Observable<Unit>,
+            getUsername: () -> String,
+            getFullName: () -> String,
+            getPassword: () -> String,
+            getPhone: () -> String
+        )
     }
 }
