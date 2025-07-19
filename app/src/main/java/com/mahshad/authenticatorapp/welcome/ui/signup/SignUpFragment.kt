@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.jakewharton.rxbinding3.view.clicks
@@ -29,6 +30,7 @@ class SignUpFragment : Fragment(), SignUpContract.SignUpView {
     private lateinit var phoneEditTextObservable: Observable<CharSequence>
     private lateinit var signUpButton: Button
     private lateinit var signUpButtonObservable: Observable<Unit>
+    private lateinit var navigateBack: TextView
     private lateinit var myContext: Context
 
     @Inject
@@ -59,6 +61,10 @@ class SignUpFragment : Fragment(), SignUpContract.SignUpView {
         phoneEditTextObservable = phoneEditText.textChanges()
         signUpButton = signUpFragment.myGradientMaterialButton
         signUpButtonObservable = signUpButton.clicks()
+        navigateBack = signUpFragment.navigateBack
+        navigateBack.setOnClickListener {
+            parentFragmentManager.popBackStack()
+        }
         presenter.attachView(this)
         presenter.signUpValidationFlow(
             usernameEditTextObservable, fullNameEditTextObservable,

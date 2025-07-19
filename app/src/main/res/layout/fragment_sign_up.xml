@@ -140,8 +140,9 @@
             android:text="@string/already_a_member" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
+            android:id="@+id/navigate_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
