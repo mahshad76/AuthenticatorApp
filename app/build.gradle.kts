@@ -59,6 +59,7 @@ dependencies {
 
     implementation(libs.rxjava)
     implementation(libs.rxandroid)
+    implementation (libs.rx.preferences)
 
     //rxbinding
     implementation(libs.rxbinding.appcompat.v310)

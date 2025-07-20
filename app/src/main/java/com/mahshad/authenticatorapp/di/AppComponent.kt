@@ -2,6 +2,7 @@ package com.mahshad.authenticatorapp.di
 
 import android.content.Context
 import com.mahshad.authenticatorapp.MyApplication
+import com.mahshad.authenticatorapp.welcome.data.localdatasource.UserSharedPrefModule
 import com.mahshad.authenticatorapp.welcome.di.ActivityBuildersModule
 import com.mahshad.authenticatorapp.welcome.di.FragmentBuildersModule
 import com.mahshad.authenticatorapp.welcome.di.PresenterModule
@@ -15,7 +16,7 @@ import javax.inject.Singleton
     modules = [
         ThreadingModule::class,
         AndroidSupportInjectionModule::class,
-        LocalDataSourceModule::class,
+        UserSharedPrefModule::class,
         ActivityBuildersModule::class,
         FragmentBuildersModule::class,
         PresenterModule::class
