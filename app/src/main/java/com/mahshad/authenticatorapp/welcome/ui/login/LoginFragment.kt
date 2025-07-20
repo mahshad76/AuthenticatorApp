@@ -88,6 +88,11 @@ class LoginFragment : Fragment(), Contract.View {
         Toast.LENGTH_SHORT
     ).show()
 
+    override fun showLoginSuccess() = Toast.makeText(
+        myContext, "Successful Login",
+        Toast.LENGTH_SHORT
+    ).show()
+
     override fun getUsername() = usernameText.text.toString()
 
     override fun getPassword() = passwordText.text.toString()

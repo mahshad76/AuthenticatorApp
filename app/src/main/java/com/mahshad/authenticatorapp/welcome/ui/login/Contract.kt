@@ -9,6 +9,7 @@ interface Contract {
     interface View : BaseView {
         fun setLoginButtonEnabled(isEnabled: Boolean)
         fun showLoginError()
+        fun showLoginSuccess()
         fun getUsername(): String?
         fun getPassword(): String?
 

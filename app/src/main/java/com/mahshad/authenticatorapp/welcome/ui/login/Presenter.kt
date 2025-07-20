@@ -57,20 +57,22 @@ class Presenter @Inject constructor(
     override fun loginCheck(buttonObservable: Observable<Unit>) {
         buttonObservable
             .throttleFirst(500, TimeUnit.MILLISECONDS)
-            .observeOn(ioScheduler)
-            .map {
+            .observeOn(mainScheduler)
+            .switchMapSingle {
                 val username = view?.getUsername() ?: ""
                 val password = view?.getPassword() ?: ""
-                userSharedPref.readPassword() == username &&
-                        userSharedPref.readPassword() == password
-            }
-            .filter { !it }
-            .observeOn(mainScheduler)
-            .subscribe(
-                { view?.showLoginError() },
-                { error: Throwable ->
-                    Log.e("loginCheckError", "loginCheck: ${error.message}", error)
+                Observable.zip(
+                    userSharedPref.readUsername().toObservable(),
+                    userSharedPref.readPassword().toObservable()
+                ) { usernamePref: String?, passwordPref: String? ->
+                    usernamePref == username && passwordPref == password
                 }
-            )
+                    .singleOrError()
+                    .subscribeOn(ioScheduler)
+            }
+            .observeOn(mainScheduler)
+            .subscribe({ isValid: Boolean ->
+                if (isValid) view?.showLoginSuccess() else view?.showLoginError()
+            }, { error: Throwable -> Log.e("TAG", "loginCheckError: ${error.message}") })
     }
 }
