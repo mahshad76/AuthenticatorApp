@@ -2,11 +2,13 @@ package com.mahshad.authenticatorapp.welcome.data.localdatasource
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import com.f2prateek.rx.preferences2.RxSharedPreferences
 import com.mahshad.authenticatorapp.di.IoScheduler
 import io.reactivex.Completable
 import io.reactivex.Maybe
 import io.reactivex.Scheduler
+import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -39,17 +41,19 @@ class UserSharedPrefImpl @Inject constructor(
             .subscribeOn(ioScheduler)
     }
 
-    override fun saveUsername(username: String): Completable {
+    override fun saveUsername(username: String): Disposable {
         return Completable.fromAction {
             rxSharedPreferences.getString(USERNAME_KEY).set(username)
         }
             .subscribeOn(ioScheduler)
+            .subscribe { Log.d("TAG", "saveUsername") }
     }
 
-    override fun savePassword(password: String): Completable {
+    override fun savePassword(password: String): Disposable {
         return Completable.fromAction {
             rxSharedPreferences.getString(PASSWORD_KEY).set(password)
         }
             .subscribeOn(ioScheduler)
+            .subscribe { Log.d("TAG", "savePassword") }
     }
 }

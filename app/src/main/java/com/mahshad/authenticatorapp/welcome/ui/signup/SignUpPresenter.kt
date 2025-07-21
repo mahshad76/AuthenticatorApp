@@ -59,16 +59,21 @@ class SignUpPresenter @Inject constructor(
                     userSharedPref.readUsername().toObservable(),
                     userSharedPref.readPassword().toObservable()
                 ) { userPref, passwordPref ->
-                    // This comparison happens on the IO scheduler
-                    userPref == username && passwordPref == password
+                    Triple(
+                        (userPref == username) && (passwordPref == password),
+                        username,
+                        password
+                    )
                 }
             }
             // **Switch back to mainScheduler for UI updates**
             .observeOn(mainScheduler)
-            .subscribe({ doesExist: Boolean ->
+            .subscribe({ (doesExist: Boolean, username: String, password: String) ->
                 if (doesExist) {
                     view?.unsuccessfulSignUp()
                 } else {
+                    userSharedPref.saveUsername(username)
+                    userSharedPref.savePassword(password)
                     view?.showSuccessfulSignup()
                 }
             }, { error: Throwable ->
