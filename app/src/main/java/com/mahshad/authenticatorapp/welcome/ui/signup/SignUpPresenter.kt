@@ -1,11 +1,13 @@
 package com.mahshad.authenticatorapp.welcome.ui.signup
 
+import android.util.Log
 import com.mahshad.authenticatorapp.common.BasePresenterExtensions.processEditTextFlow
 import com.mahshad.authenticatorapp.di.IoScheduler
 import com.mahshad.authenticatorapp.di.MainScheduler
 import com.mahshad.authenticatorapp.welcome.data.localdatasource.UserSharedPref
 import io.reactivex.Observable
 import io.reactivex.Scheduler
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -39,32 +41,42 @@ class SignUpPresenter @Inject constructor(
     override fun signUpCheck(
         buttonObservable: Observable<Unit>,
         getUsername: () -> String,
-        getFullName: () -> String,
+        getFullName: () -> String, // Not used in this snippet, but kept for context
         getPassword: () -> String,
-        getPhone: () -> String
+        getPhone: () -> String     // Not used in this snippet, but kept for context
     ) {
-//        var username = ""
-//        var password = ""
-//        buttonObservable
-//            .throttleFirst(500, TimeUnit.MILLISECONDS)
-//            .map {
-//                username = getUsername()
-//                password = getPassword()
-//                username == userSharedPref.readUsername() &&
-//                        password == userSharedPref.readPassword()
-//            }
-//            .distinctUntilChanged()
-//            .subscribe({ doesExist ->
-//                if (doesExist) {
-//                    userSharedPref.saveUsername(username)
-//                    userSharedPref.savePassword(password)
-//                    Log.d("TAG", "signUpCheck: ${doesExist}")
-//                    view?.unsuccessfulSignUp()
-//                } else {
-//                    Log.d("TAG", "signUpCheck: ${doesExist}")
-//                    view?.showSuccessfulSignup()
-//                }
-//            }, { error: Throwable -> Log.e("TAG", "signUpCheckError: ${error.message}") })
+        buttonObservable
+            .throttleFirst(500, TimeUnit.MILLISECONDS)
+            // **Crucial: Switch to mainScheduler BEFORE accessing UI**
+            .observeOn(mainScheduler)
+            .map { // This block now executes on the main thread
+                Pair(getUsername.invoke(), getPassword.invoke())
+            }
+            // **Now switch to ioScheduler for background work**
+            .observeOn(ioScheduler)
+            .switchMap { (username, password) ->
+                Observable.zip(
+                    userSharedPref.readUsername().toObservable(),
+                    userSharedPref.readPassword().toObservable()
+                ) { userPref, passwordPref ->
+                    // This comparison happens on the IO scheduler
+                    userPref == username && passwordPref == password
+                }
+            }
+            // **Switch back to mainScheduler for UI updates**
+            .observeOn(mainScheduler)
+            .subscribe({ doesExist: Boolean ->
+                if (doesExist) {
+                    view?.unsuccessfulSignUp()
+                } else {
+                    view?.showSuccessfulSignup()
+                }
+            }, { error: Throwable ->
+                // Good practice to log errors!
+                Log.e("SignUpCheck", "Error during sign up check: ${error.message}", error)
+                // Optionally, show an error message to the user
+                // Assuming you have such a method
+            })
     }
 
     override fun attachView(view: SignUpContract.SignUpView) {
