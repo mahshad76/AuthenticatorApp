@@ -26,6 +26,10 @@ android {
                 "proguard-rules.pro"
             )
         }
+        debug {
+            buildConfigField("String", "BASE_URL", "\"https://newsapi.org/v2/\"")
+            buildConfigField("String", "API_KEY", "\"5b5e4bf8afb04276a6683440a68f0228\"")
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -36,6 +40,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -48,7 +53,6 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
 
     //dagger2
-
     implementation(libs.dagger)
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
@@ -60,14 +64,18 @@ dependencies {
     kapt(libs.dagger.android.processor)
 
     //rxjava2
-
     implementation(libs.rxjava)
     implementation(libs.rxandroid)
-    implementation (libs.rx.preferences)
+    implementation(libs.rx.preferences)
 
     //rxbinding
     implementation(libs.rxbinding.appcompat.v310)
     implementation(libs.rxbinding.core.v310)
+
+    //retrofit, gson converter, and okhttp3
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
