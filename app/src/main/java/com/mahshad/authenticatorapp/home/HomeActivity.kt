@@ -8,7 +8,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mahshad.authenticatorapp.R
+import com.mahshad.authenticatorapp.common.AppCompatActivityExtensions.replaceFragment
 import com.mahshad.authenticatorapp.databinding.ActivityHomeBinding
+import com.mahshad.authenticatorapp.home.ui.home.HomeFragment
 
 class HomeActivity : AppCompatActivity() {
 
@@ -31,5 +33,8 @@ class HomeActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        if (savedInstanceState == null) {
+            replaceFragment(R.id.nav_host_fragment_activity_home2, HomeFragment())
+        }
     }
 }
