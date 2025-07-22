@@ -50,6 +50,10 @@ dependencies {
     //dagger2
 
     implementation(libs.dagger)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
     kapt(libs.dagger.compiler)
     implementation(libs.dagger.android)
     implementation(libs.dagger.android.support)
