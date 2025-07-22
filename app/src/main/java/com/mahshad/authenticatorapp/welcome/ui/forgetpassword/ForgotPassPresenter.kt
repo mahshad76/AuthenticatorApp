@@ -27,7 +27,7 @@ class ForgotPassPresenter @Inject constructor(
             processEditTextFlow(passObservable),
             processEditTextFlow(confirmPassObservable)
         ) { password: String, confirmation: String ->
-            password.length > 7 && confirmation.length > 7
+            password.length > 7 && (confirmation == password)
         }
             .distinctUntilChanged()
             .subscribeOn(ioScheduler)
