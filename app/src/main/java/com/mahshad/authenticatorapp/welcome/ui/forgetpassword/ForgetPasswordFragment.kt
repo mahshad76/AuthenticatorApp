@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.textChanges
@@ -25,12 +26,14 @@ class ForgetPasswordFragment : Fragment(), ForgotPassContract.View {
     private lateinit var button: Button
     private lateinit var buttonObservable: Observable<Unit>
     private lateinit var navigateBack: TextView
+    private lateinit var myContext: Context
 
     @Inject
     lateinit var presenter: ForgotPassContract.Presenter
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
+        myContext = context
         super.onAttach(context)
     }
 
@@ -55,10 +58,16 @@ class ForgetPasswordFragment : Fragment(), ForgotPassContract.View {
         }
         presenter.attachView(this)
         presenter.enablingResetPassButton(passwordTextObservable, confirmPasswordTextObservable)
+        presenter.reWritePassword(buttonObservable, { passwordText.text.toString() })
         return fragmentForgetPasswordBinding.root
     }
 
     override fun setResetButtonEnabled(isEnabled: Boolean) {
         button.isEnabled = isEnabled
     }
+
+    override fun successfulReset() = Toast.makeText(
+        myContext, "The password is reset successfully",
+        Toast.LENGTH_SHORT
+    ).show()
 }

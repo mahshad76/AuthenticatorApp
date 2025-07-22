@@ -8,6 +8,7 @@ import io.reactivex.disposables.Disposable
 interface ForgotPassContract {
     interface View : BaseView {
         fun setResetButtonEnabled(isEnabled: Boolean)
+        fun successfulReset()
     }
 
     interface Presenter : BasePresenter<View> {
@@ -16,6 +17,7 @@ interface ForgotPassContract {
             confirmPassObservable: Observable<CharSequence>
         ): Disposable
 
-        fun reWritePassword()
+        fun reWritePassword(resetButtonObservable: Observable<Unit>, getNewPass: () -> String)
+                : Disposable
     }
 }

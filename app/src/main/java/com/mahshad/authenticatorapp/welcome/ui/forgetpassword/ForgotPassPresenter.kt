@@ -8,6 +8,7 @@ import com.mahshad.authenticatorapp.welcome.data.localdatasource.UserSharedPref
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.disposables.Disposable
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -39,8 +40,21 @@ class ForgotPassPresenter @Inject constructor(
             )
     }
 
-    override fun reWritePassword() {
-        TODO("Not yet implemented")
+    override fun reWritePassword(
+        resetButtonObservable: Observable<Unit>,
+        getNewPass: () -> String
+    ): Disposable {
+        return resetButtonObservable
+            .throttleFirst(500, TimeUnit.MILLISECONDS)
+            .map { getNewPass.invoke() }
+            .doOnNext { newPass: String ->
+                userSharePref.savePassword(newPass)
+            }
+            .observeOn(mainScheduler)
+            .subscribe { newPass: String ->
+                Log.d("TAG", "reWritePassword:${newPass}")
+                view?.successfulReset()
+            }
     }
 
     override fun attachView(view: ForgotPassContract.View) {
