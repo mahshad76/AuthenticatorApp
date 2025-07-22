@@ -54,6 +54,11 @@ class ForgetPasswordFragment : Fragment(), ForgotPassContract.View {
             parentFragmentManager.popBackStack()
         }
         presenter.attachView(this)
+        presenter.enablingResetPassButton(passwordTextObservable, confirmPasswordTextObservable)
         return fragmentForgetPasswordBinding.root
+    }
+
+    override fun setResetButtonEnabled(isEnabled: Boolean) {
+        button.isEnabled = isEnabled
     }
 }
