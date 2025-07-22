@@ -1,5 +1,6 @@
 package com.mahshad.authenticatorapp.welcome.di
 
+import com.mahshad.authenticatorapp.welcome.ui.forgetpassword.ForgetPasswordFragment
 import com.mahshad.authenticatorapp.welcome.ui.login.LoginFragment
 import com.mahshad.authenticatorapp.welcome.ui.signup.SignUpFragment
 import dagger.Module
@@ -11,4 +12,6 @@ abstract class FragmentBuildersModule {
     abstract fun contributeLoginFragment(): LoginFragment
     @ContributesAndroidInjector
     abstract fun contributeSignUpFragment(): SignUpFragment
+    @ContributesAndroidInjector
+    abstract fun contributeForgotPasswordFragment(): ForgetPasswordFragment
 }

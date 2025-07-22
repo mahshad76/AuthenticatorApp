@@ -41,18 +41,16 @@ class SignUpPresenter @Inject constructor(
     override fun signUpCheck(
         buttonObservable: Observable<Unit>,
         getUsername: () -> String,
-        getFullName: () -> String, // Not used in this snippet, but kept for context
+        getFullName: () -> String,
         getPassword: () -> String,
-        getPhone: () -> String     // Not used in this snippet, but kept for context
+        getPhone: () -> String
     ) {
         buttonObservable
             .throttleFirst(500, TimeUnit.MILLISECONDS)
-            // **Crucial: Switch to mainScheduler BEFORE accessing UI**
             .observeOn(mainScheduler)
-            .map { // This block now executes on the main thread
+            .map {
                 Pair(getUsername.invoke(), getPassword.invoke())
             }
-            // **Now switch to ioScheduler for background work**
             .observeOn(ioScheduler)
             .switchMap { (username, password) ->
                 Observable.zip(
@@ -66,7 +64,6 @@ class SignUpPresenter @Inject constructor(
                     )
                 }
             }
-            // **Switch back to mainScheduler for UI updates**
             .observeOn(mainScheduler)
             .subscribe({ (doesExist: Boolean, username: String, password: String) ->
                 if (doesExist) {
@@ -77,10 +74,7 @@ class SignUpPresenter @Inject constructor(
                     view?.showSuccessfulSignup()
                 }
             }, { error: Throwable ->
-                // Good practice to log errors!
                 Log.e("SignUpCheck", "Error during sign up check: ${error.message}", error)
-                // Optionally, show an error message to the user
-                // Assuming you have such a method
             })
     }
 

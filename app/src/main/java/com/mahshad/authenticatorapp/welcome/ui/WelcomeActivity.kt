@@ -8,8 +8,8 @@ import androidx.core.view.WindowInsetsCompat
 import com.mahshad.authenticatorapp.R
 import com.mahshad.authenticatorapp.common.AppCompatActivityExtensions.replaceFragment
 import com.mahshad.authenticatorapp.databinding.ActivityMainBinding
-import com.mahshad.authenticatorapp.welcome.ui.forgetpassword.ForgetPasswordFragment
 import com.mahshad.authenticatorapp.welcome.ui.login.Contract
+import com.mahshad.authenticatorapp.welcome.ui.login.LoginFragment
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
@@ -31,8 +31,7 @@ class WelcomeActivity : AppCompatActivity() {
             insets
         }
         if (savedInstanceState == null) {
-            //replaceFragment(R.id.fragment_container, LoginFragment())
-            replaceFragment(R.id.fragment_container, ForgetPasswordFragment())
+            replaceFragment(R.id.fragment_container, LoginFragment())
         }
     }
 }
