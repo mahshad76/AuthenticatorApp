@@ -1,6 +1,6 @@
-package com.mahshad.authenticatorapp.home.network
+package com.mahshad.authenticatorapp.home.network.home
 
-import com.mahshad.authenticatorapp.home.model.response.Root
+import com.mahshad.authenticatorapp.home.data.home.model.remote.RootDTO
 import io.reactivex.Single
 import retrofit2.Response
 import retrofit2.http.GET
@@ -10,5 +10,5 @@ interface ApiService {
     @GET("everything")
     fun getRecentArticles(
         @Query("q") query: String
-    ): Single<Response<List<Root?>>>
+    ): Single<Response<List<RootDTO?>>>
 }

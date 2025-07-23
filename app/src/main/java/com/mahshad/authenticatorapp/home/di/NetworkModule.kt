@@ -1,6 +1,6 @@
 package com.mahshad.authenticatorapp.home.di
 
-import com.mahshad.authenticatorapp.home.network.ApiService
+import com.mahshad.authenticatorapp.home.network.home.ApiService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
