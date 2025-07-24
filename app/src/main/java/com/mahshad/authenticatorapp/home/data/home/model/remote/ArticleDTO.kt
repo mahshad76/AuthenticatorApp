@@ -2,7 +2,7 @@ package com.mahshad.authenticatorapp.home.data.home.model.remote
 
 import com.google.gson.annotations.SerializedName
 
-data class RootDTO(
+data class ArticleDTO(
     @SerializedName("author")
     val author: String?,
     @SerializedName("content")
@@ -11,7 +11,7 @@ data class RootDTO(
     val description: String?,
     @SerializedName("publishedAt")
     val publishedAt: String?,
-    @SerializedName("source")
+    @SerializedName("sourceDTO")
     val sourceDTO: SourceDTO?,
     @SerializedName("title")
     val title: String?,

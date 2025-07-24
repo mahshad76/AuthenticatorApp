@@ -3,7 +3,7 @@ package com.mahshad.authenticatorapp.home.ui.home
 import android.util.Log
 import com.mahshad.authenticatorapp.di.IoScheduler
 import com.mahshad.authenticatorapp.di.MainScheduler
-import com.mahshad.authenticatorapp.home.data.home.model.remote.ServerResponse
+import com.mahshad.authenticatorapp.home.data.home.model.remote.ServerResponseDTO
 import com.mahshad.authenticatorapp.home.network.home.ApiService
 import io.reactivex.Scheduler
 import io.reactivex.disposables.Disposable
@@ -24,9 +24,12 @@ class HomePresenter @Inject constructor(
         return apiService.getRecentArticles("apple")
             .subscribeOn(ioScheduler)
             .observeOn(mainScheduler)
-            .subscribe({ response: Response<ServerResponse?> ->
+            .subscribe({ response: Response<ServerResponseDTO?> ->
                 view?.hideLoading()
-                if (response.isSuccessful) Log.d("TAG", "getArticlesIsSuccessful: ${response.body()}")
+                if (response.isSuccessful) Log.d(
+                    "TAG",
+                    "getArticlesIsSuccessful: ${response.body()}"
+                )
                 else view?.showErrorMessage(response.errorBody().toString())
             }, { error: Throwable -> Log.e("TAG", "getArticlesError: ${error.message}") })
     }
