@@ -26,10 +26,7 @@ class HomePresenter @Inject constructor(
             .observeOn(mainScheduler)
             .subscribe({ response: Response<ServerResponseDTO?> ->
                 view?.hideLoading()
-                if (response.isSuccessful) Log.d(
-                    "TAG",
-                    "getArticlesIsSuccessful: ${response.body()}"
-                )
+                if (response.isSuccessful) view?.showArticles(response.body().toString())
                 else view?.showErrorMessage(response.errorBody().toString())
             }, { error: Throwable -> Log.e("TAG", "getArticlesError: ${error.message}") })
     }

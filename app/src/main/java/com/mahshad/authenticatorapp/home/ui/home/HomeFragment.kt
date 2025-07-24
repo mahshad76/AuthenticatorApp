@@ -6,7 +6,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.mahshad.authenticatorapp.databinding.FragmentHomeBinding
 import dagger.android.support.AndroidSupportInjection
@@ -16,6 +18,7 @@ class HomeFragment : Fragment(), HomeContract.View {
 
     private lateinit var _binding: FragmentHomeBinding
     private lateinit var textView: TextView
+    private lateinit var progressBar: ProgressBar
 
     @Inject
     lateinit var presenter: HomeContract.Presenter
@@ -23,6 +26,7 @@ class HomeFragment : Fragment(), HomeContract.View {
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
+        presenter.attachView(this)
     }
 
     override fun onCreateView(
@@ -33,6 +37,7 @@ class HomeFragment : Fragment(), HomeContract.View {
 
         _binding = FragmentHomeBinding.inflate(inflater)
         textView = _binding.textHome
+        progressBar = _binding.loadingProgressBar
         val root: View = _binding.root
         presenter.getArticles()
         return root
@@ -43,11 +48,11 @@ class HomeFragment : Fragment(), HomeContract.View {
     }
 
     override fun showLoading() {
-        TODO("Not yet implemented")
+        progressBar.isVisible = true
     }
 
     override fun hideLoading() {
-        TODO("Not yet implemented")
+        progressBar.isVisible = false
     }
 
     override fun showArticles(articles: String) {
