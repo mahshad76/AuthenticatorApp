@@ -1,8 +1,9 @@
 package com.mahshad.authenticatorapp.home.ui.home
 
+import android.util.Log
 import com.mahshad.authenticatorapp.di.IoScheduler
 import com.mahshad.authenticatorapp.di.MainScheduler
-import com.mahshad.authenticatorapp.home.data.home.model.remote.RootDTO
+import com.mahshad.authenticatorapp.home.data.home.model.remote.ServerResponse
 import com.mahshad.authenticatorapp.home.network.home.ApiService
 import io.reactivex.Scheduler
 import io.reactivex.disposables.Disposable
@@ -11,7 +12,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class Presenter @Inject constructor(
+class HomePresenter @Inject constructor(
     private val apiService: ApiService,
     @IoScheduler private val ioScheduler: Scheduler,
     @MainScheduler private val mainScheduler: Scheduler
@@ -23,11 +24,11 @@ class Presenter @Inject constructor(
         return apiService.getRecentArticles("apple")
             .subscribeOn(ioScheduler)
             .observeOn(mainScheduler)
-            .subscribe { response: Response<List<RootDTO?>> ->
+            .subscribe({ response: Response<ServerResponse?> ->
                 view?.hideLoading()
-                if (response.isSuccessful) view?.showArticles(response.body())
+                if (response.isSuccessful) Log.d("TAG", "getArticlesIsSuccessful: ${response.body()}")
                 else view?.showErrorMessage(response.errorBody().toString())
-            }
+            }, { error: Throwable -> Log.e("TAG", "getArticlesError: ${error.message}") })
     }
 
     override fun attachView(view: HomeContract.View) {

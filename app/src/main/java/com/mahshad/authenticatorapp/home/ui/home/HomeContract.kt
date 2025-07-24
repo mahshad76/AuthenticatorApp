@@ -2,14 +2,13 @@ package com.mahshad.authenticatorapp.home.ui.home
 
 import com.mahshad.authenticatorapp.common.BasePresenter
 import com.mahshad.authenticatorapp.common.BaseView
-import com.mahshad.authenticatorapp.home.data.home.model.remote.RootDTO
 import io.reactivex.disposables.Disposable
 
 interface HomeContract {
     interface View : BaseView {
         fun showLoading()
         fun hideLoading()
-        fun showArticles(articles: List<RootDTO?>?)
+        fun showArticles(articles: String)
         fun showErrorMessage(error: String)
         fun showSuccessMessage()
     }

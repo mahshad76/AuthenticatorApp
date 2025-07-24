@@ -1,7 +1,11 @@
 package com.mahshad.authenticatorapp.home.di
 
+import com.mahshad.authenticatorapp.home.ui.home.HomeFragment
 import dagger.Module
+import dagger.android.ContributesAndroidInjector
 
 @Module
-class HomeFragmentBuildersModule {
+abstract class HomeFragmentBuildersModule {
+    @ContributesAndroidInjector
+    abstract fun contributeHomeFragment(): HomeFragment
 }
