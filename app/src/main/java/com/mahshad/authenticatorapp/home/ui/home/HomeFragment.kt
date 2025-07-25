@@ -36,7 +36,7 @@ class HomeFragment : Fragment(), HomeContract.View {
     ): View {
 
         _binding = FragmentHomeBinding.inflate(inflater)
-        textView = _binding.textHome
+        //textView = _binding.textHome
         progressBar = _binding.loadingProgressBar
         val root: View = _binding.root
         presenter.getArticles()
@@ -57,7 +57,7 @@ class HomeFragment : Fragment(), HomeContract.View {
 
     override fun showArticles(articles: String) {
         Log.d("TAG", "showArticles: successful")
-        textView.text = articles
+        //textView.text = articles
     }
 
     override fun showErrorMessage(error: String) {

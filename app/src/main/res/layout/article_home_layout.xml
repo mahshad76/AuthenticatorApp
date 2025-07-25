@@ -42,7 +42,7 @@
             android:textColor="?attr/colorOnSurface" />
 
         <TextView
-            android:id="@+id/item_subtitle"
+            android:id="@+id/item_author"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -53,7 +53,7 @@
             android:textColor="?attr/colorOnSurfaceVariant" />
 
         <TextView
-            android:id="@+id/item_timestamp"
+            android:id="@+id/item_publishAt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
