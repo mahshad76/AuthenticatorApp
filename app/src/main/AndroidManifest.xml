@@ -19,7 +19,7 @@
         <activity
             android:name=".home.HomeActivity"
             android:exported="false"
-            android:label="@string/title_activity_home"/>
+            android:label="@string/title_activity_home" />
         <activity
             android:name=".welcome.ui.WelcomeActivity"
             android:exported="true">
