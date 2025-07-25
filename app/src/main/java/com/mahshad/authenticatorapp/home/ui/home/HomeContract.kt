@@ -2,6 +2,7 @@ package com.mahshad.authenticatorapp.home.ui.home
 
 import com.mahshad.authenticatorapp.common.BasePresenter
 import com.mahshad.authenticatorapp.common.BaseView
+import io.reactivex.disposables.Disposable
 
 interface HomeContract {
     interface View : BaseView {
@@ -23,6 +24,6 @@ interface HomeContract {
      *  * and managing UI state (e.g., loading, error states).
      *  */
     interface Presenter : BasePresenter<View> {
-        //fun getArticles(): Disposable
+        fun getArticles(): Disposable
     }
 }

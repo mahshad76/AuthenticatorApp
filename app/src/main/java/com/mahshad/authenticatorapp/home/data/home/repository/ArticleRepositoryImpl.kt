@@ -26,5 +26,6 @@ class ArticleRepositoryImpl @Inject constructor(
                     emptyList<Article>()
                 }
             }
+            .subscribeOn(computationScheduler)
     }
 }
