@@ -23,7 +23,7 @@ class HomePresenter @Inject constructor(
             .subscribe(
                 {
                     view?.hideLoading()
-                    view?.showArticles(it.toString())
+                    view?.showArticles(it)
                 },
                 { error: Throwable -> Log.e("TAG", "getArticlesError: ${error.message}") })
     }
