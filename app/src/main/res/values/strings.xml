@@ -19,4 +19,5 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="search_articles_by_title">Search articles by title...</string>
+    <string name="like_button">Like button</string>
 </resources>

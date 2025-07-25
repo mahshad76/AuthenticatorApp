@@ -21,14 +21,42 @@
         android:orientation="vertical"
         android:padding="5dp">
 
-        <ImageView
-            android:id="@+id/item_image"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:importantForAccessibility="no"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_dashboard_black_24dp"
-            tools:src="@tools:sample/backgrounds/scenic" />
+            android:layout_height="180dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/item_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="132dp"
+                    android:importantForAccessibility="no"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_dashboard_black_24dp"
+                    tools:src="@tools:sample/backgrounds/scenic" />
+
+                <ImageView
+                    android:id="@+id/like_icon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="top|end"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:contentDescription="@string/like_button"
+                    android:focusable="true"
+                    android:padding="12dp"
+                    android:src="@drawable/like_svgrepo_com"
+                    app:tint="@color/black" />
+
+            </LinearLayout>
+
+        </FrameLayout>
 
         <TextView
             android:id="@+id/item_title"
@@ -37,6 +65,9 @@
             android:layout_marginBottom="4dp"
             android:ellipsize="end"
             android:maxLines="2"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
             android:text="Beautiful Landscape View"
             android:textAppearance="?attr/textAppearanceHeadline6"
             android:textColor="?attr/colorOnSurface" />
@@ -48,6 +79,8 @@
             android:layout_marginBottom="8dp"
             android:ellipsize="end"
             android:maxLines="3"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:text="Captured in the serene mountains of Alberta, Canada."
             android:textAppearance="?attr/textAppearanceBody2"
             android:textColor="?attr/colorOnSurfaceVariant" />
@@ -57,9 +90,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
             android:text="2 hours ago"
             android:textAppearance="?attr/textAppearanceCaption"
-            android:textColor="?attr/colorOnSurfaceVariant" />
+            android:textColor="?attr/colorOnSurfaceVariant" /> <!-- Add padding to the bottom of the card content -->
 
     </LinearLayout>
 

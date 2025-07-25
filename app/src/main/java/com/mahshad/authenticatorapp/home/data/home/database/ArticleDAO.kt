@@ -5,16 +5,17 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import io.reactivex.Completable
 import io.reactivex.Single
 
 @Dao
 interface ArticleDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(article: LikedArticleEntity)
+    fun insert(article: LikedArticleEntity): Completable
 
     @Query("SELECT * FROM liked_articles")
     fun getAllUsers(): Single<List<LikedArticleEntity>>
 
     @Delete
-    suspend fun delete(article: LikedArticleEntity)
+    fun delete(article: LikedArticleEntity): Completable
 }
