@@ -2,6 +2,7 @@ package com.mahshad.authenticatorapp.di
 
 import android.content.Context
 import com.mahshad.authenticatorapp.MyApplication
+import com.mahshad.authenticatorapp.home.di.DatabaseModule
 import com.mahshad.authenticatorapp.home.di.HomeActivityBuildersModule
 import com.mahshad.authenticatorapp.home.di.HomeFragmentBuildersModule
 import com.mahshad.authenticatorapp.home.di.HomePresenterModule
@@ -28,7 +29,8 @@ import javax.inject.Singleton
         HomePresenterModule::class,
         HomeActivityBuildersModule::class,
         HomeFragmentBuildersModule::class,
-        RepositoryModule::class
+        RepositoryModule::class,
+        DatabaseModule::class
     ]
 )
 interface AppComponent {
