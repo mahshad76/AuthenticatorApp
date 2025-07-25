@@ -1,6 +1,7 @@
 package com.mahshad.authenticatorapp.home.data.home.model.remote
 
 import com.google.gson.annotations.SerializedName
+import com.mahshad.authenticatorapp.home.data.home.model.repository.Article
 
 data class ArticleDTO(
     @SerializedName("author")
@@ -19,4 +20,11 @@ data class ArticleDTO(
     val url: String?,
     @SerializedName("urlToImage")
     val urlToImage: String?
+)
+
+fun ArticleDTO.toArticle(): Article = Article(
+    author = this.author,
+    publishedAt = this.publishedAt,
+    title = this.title,
+    urlToImage = this.urlToImage
 )

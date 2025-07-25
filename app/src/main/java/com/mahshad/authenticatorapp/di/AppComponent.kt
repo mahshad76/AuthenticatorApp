@@ -27,7 +27,8 @@ import javax.inject.Singleton
         NetworkModule::class,
         HomePresenterModule::class,
         HomeActivityBuildersModule::class,
-        HomeFragmentBuildersModule::class
+        HomeFragmentBuildersModule::class,
+        RepositoryModule::class
     ]
 )
 interface AppComponent {
