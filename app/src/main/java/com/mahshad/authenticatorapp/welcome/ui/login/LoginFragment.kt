@@ -1,6 +1,7 @@
 package com.mahshad.authenticatorapp.welcome.ui.login
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import com.jakewharton.rxbinding3.widget.textChanges
 import com.mahshad.authenticatorapp.R
 import com.mahshad.authenticatorapp.common.AppCompatActivityExtensions.replaceFragment
 import com.mahshad.authenticatorapp.databinding.FragmentLoginBinding
+import com.mahshad.authenticatorapp.home.HomeActivity
 import com.mahshad.authenticatorapp.welcome.ui.forgetpassword.ForgetPasswordFragment
 import com.mahshad.authenticatorapp.welcome.ui.signup.SignUpFragment
 import dagger.android.support.AndroidSupportInjection
@@ -88,10 +90,14 @@ class LoginFragment : Fragment(), Contract.View {
         Toast.LENGTH_SHORT
     ).show()
 
-    override fun showLoginSuccess() = Toast.makeText(
-        myContext, "Successful Login",
-        Toast.LENGTH_SHORT
-    ).show()
+    override fun showLoginSuccess() {
+        Toast.makeText(
+            myContext, "Successful Login",
+            Toast.LENGTH_SHORT
+        ).show()
+        val intent = Intent(activity, HomeActivity::class.java)
+        startActivity(intent)
+    }
 
     override fun getUsername() = usernameText.text.toString()
 

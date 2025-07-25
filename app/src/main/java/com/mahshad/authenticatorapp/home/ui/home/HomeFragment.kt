@@ -2,7 +2,6 @@ package com.mahshad.authenticatorapp.home.ui.home
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,7 +39,6 @@ class HomeFragment : Fragment(), HomeContract.View {
     ): View {
 
         _binding = FragmentHomeBinding.inflate(inflater)
-        //textView = _binding.textHome
         recyclerView = _binding.articleRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(myContext)
         progressBar = _binding.loadingProgressBar
@@ -62,9 +60,7 @@ class HomeFragment : Fragment(), HomeContract.View {
     }
 
     override fun showArticles(articles: List<Article>) {
-        Log.d("TAG", "showArticles: ${articles}")
         recyclerView.adapter = ArticleAdapter(articles)
-        //textView.text = articles
     }
 
     override fun showErrorMessage(error: String) {
