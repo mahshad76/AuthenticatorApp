@@ -36,7 +36,7 @@ object NetworkModule {
             .addInterceptor { chain ->
                 val newRequest =
                     chain.request().newBuilder()
-                        .addHeader(HEADER_KEY, "5b5e4bf8afb04276a6683440a68f0228").build()
+                        .addHeader(HEADER_KEY, BuildConfig.API_KEY).build()
                 chain.proceed(newRequest)
             }
         return if (BuildConfig.DEBUG) {
