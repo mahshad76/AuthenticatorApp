@@ -52,7 +52,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
-    //dagger2
+    ///dagger2
     implementation(libs.dagger)
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
@@ -63,25 +63,30 @@ dependencies {
     implementation(libs.dagger.android.support)
     kapt(libs.dagger.android.processor)
 
-    //rxjava2
+    ///rxjava2
     implementation(libs.rxjava)
     implementation(libs.rxandroid)
     implementation(libs.rx.preferences)
 
-    //rxbinding
+    ///rxbinding
     implementation(libs.rxbinding.appcompat.v310)
     implementation(libs.rxbinding.core.v310)
 
-    //retrofit, gson converter, and okhttp3
+    ///retrofit, gson converter, and okhttp3
     implementation(libs.retrofit)
     implementation (libs.adapter.rxjava2)
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
 
-    //glide
+    ///glide
     implementation (libs.glide)
     annotationProcessor (libs.compiler)
 
+    ///room
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    kapt(libs.androidx.room.compiler)
+    
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
