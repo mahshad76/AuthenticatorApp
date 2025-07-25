@@ -3,6 +3,7 @@ package com.mahshad.authenticatorapp.home.ui.home
 import com.mahshad.authenticatorapp.common.BasePresenter
 import com.mahshad.authenticatorapp.common.BaseView
 import com.mahshad.authenticatorapp.home.data.home.model.repository.Article
+import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 
 interface HomeContract {
@@ -25,6 +26,6 @@ interface HomeContract {
      *  * and managing UI state (e.g., loading, error states).
      *  */
     interface Presenter : BasePresenter<View> {
-        fun getArticles(): Disposable
+        fun getArticles(searchQuery: Observable<CharSequence>): Disposable
     }
 }
