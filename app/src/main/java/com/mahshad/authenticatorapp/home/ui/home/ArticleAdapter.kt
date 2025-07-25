@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.mahshad.authenticatorapp.databinding.ArticleHomeLayoutBinding
 import com.mahshad.authenticatorapp.home.data.home.model.repository.Article
 
@@ -23,7 +24,12 @@ class ArticleAdapter(private val articleList: List<Article>) :
     override fun getItemCount(): Int = articleList.size
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
-        //holder.image.
+        Glide.with(holder.image.context)
+            .load(articleList[position].urlToImage)
+            .into(holder.image)
+        holder.title.text = articleList[position].title
+        holder.publishAt.text = articleList[position].publishedAt
+        holder.author.text = articleList[position].author
     }
 }
 
