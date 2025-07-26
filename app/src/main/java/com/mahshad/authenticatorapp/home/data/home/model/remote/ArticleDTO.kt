@@ -26,5 +26,6 @@ fun ArticleDTO.toArticle(): Article = Article(
     author = this.author,
     publishedAt = this.publishedAt,
     title = this.title,
-    urlToImage = this.urlToImage
+    urlToImage = this.urlToImage,
+    isLiked = false
 )

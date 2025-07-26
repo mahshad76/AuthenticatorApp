@@ -1,19 +1,22 @@
 package com.mahshad.authenticatorapp.home.ui.home
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.jakewharton.rxbinding3.view.clicks
+import com.mahshad.authenticatorapp.R
 import com.mahshad.authenticatorapp.databinding.ArticleHomeLayoutBinding
 import com.mahshad.authenticatorapp.home.data.home.model.repository.Article
 import io.reactivex.Observable
 
 class ArticleAdapter(
     private val articleList: List<Article>,
-    private val fragmentNotify: (()->Article, () -> Observable<Unit>) -> Unit
+    private val fragmentNotify: (() -> Article, () -> Observable<Unit>) -> Unit
 ) :
     RecyclerView.Adapter<ArticleViewHolder>() {
 
@@ -24,7 +27,7 @@ class ArticleAdapter(
             false
         )
         val articleViewHolder = ArticleViewHolder(binding)
-        fragmentNotify({articleList.get(articleViewHolder.id)}) { articleViewHolder.likeIcon.clicks() }
+        fragmentNotify({ articleList.get(articleViewHolder.id) }) { articleViewHolder.likeIcon.clicks() }
         return articleViewHolder
     }
 
@@ -38,6 +41,12 @@ class ArticleAdapter(
         holder.publishAt.text = articleList[position].publishedAt
         holder.author.text = articleList[position].author
         holder.id = position
+        holder.likeIcon.imageTintList = ColorStateList.valueOf(
+            ContextCompat.getColor(
+                holder.itemView.context,
+                if (articleList[position].isLiked) R.color.blue_500 else R.color.black
+            )
+        )
     }
 }
 
