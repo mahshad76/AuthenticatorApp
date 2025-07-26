@@ -80,8 +80,8 @@ class HomeFragment : Fragment(), HomeContract.View {
         TODO("Not yet implemented")
     }
 
-    fun fragmentNotify(likeClickObsGetter: () -> Observable<Unit>) {
+    fun fragmentNotify(getArticle: () -> Article, likeClickObsGetter: () -> Observable<Unit>) {
         likeIconObservable = likeClickObsGetter()
-        presenter.updateLikedArticles(likeIconObservable)
+        presenter.updateLikedArticles(getArticle, likeIconObservable)
     }
 }

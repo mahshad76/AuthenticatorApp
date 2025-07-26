@@ -13,7 +13,7 @@ import io.reactivex.Observable
 
 class ArticleAdapter(
     private val articleList: List<Article>,
-    private val fragmentNotify: (() -> Observable<Unit>) -> Unit
+    private val fragmentNotify: (()->Article, () -> Observable<Unit>) -> Unit
 ) :
     RecyclerView.Adapter<ArticleViewHolder>() {
 
@@ -24,7 +24,7 @@ class ArticleAdapter(
             false
         )
         val articleViewHolder = ArticleViewHolder(binding)
-        fragmentNotify { articleViewHolder.likeIcon.clicks() }
+        fragmentNotify({articleList.get(articleViewHolder.id)}) { articleViewHolder.likeIcon.clicks() }
         return articleViewHolder
     }
 
@@ -37,10 +37,12 @@ class ArticleAdapter(
         holder.title.text = articleList[position].title
         holder.publishAt.text = articleList[position].publishedAt
         holder.author.text = articleList[position].author
+        holder.id = position
     }
 }
 
 class ArticleViewHolder(article: ArticleHomeLayoutBinding) : RecyclerView.ViewHolder(article.root) {
+    var id: Int = -1
     val image: ImageView = article.itemImage
     val title: TextView = article.itemTitle
     val author: TextView = article.itemAuthor

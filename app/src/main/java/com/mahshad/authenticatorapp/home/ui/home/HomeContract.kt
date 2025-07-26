@@ -27,6 +27,6 @@ interface HomeContract {
      *  */
     interface Presenter : BasePresenter<View> {
         fun getArticles(searchQuery: Observable<CharSequence>): Disposable
-        fun updateLikedArticles(likeIconObservable: Observable<Unit>?)
+        fun updateLikedArticles(getArticle: () -> Article, likeIconObservable: Observable<Unit>?)
     }
 }

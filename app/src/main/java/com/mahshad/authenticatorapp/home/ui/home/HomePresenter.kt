@@ -45,9 +45,15 @@ class HomePresenter @Inject constructor(
                 })
     }
 
-    override fun updateLikedArticles(likeIconObservable: Observable<Unit>?) {
+    override fun updateLikedArticles(
+        getArticle: () -> Article,
+        likeIconObservable: Observable<Unit>?
+    ) {
         likeIconObservable?.subscribe {
-            Log.d("TAG", "updateLikedArticles: likebutton is clicked")
+            Log.d(
+                "TAG", "updateLikedArticles: likebutton is clicked with the title of " +
+                        "${getArticle().title}"
+            )
         }
 
     }
