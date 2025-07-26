@@ -6,10 +6,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.jakewharton.rxbinding3.view.clicks
 import com.mahshad.authenticatorapp.databinding.ArticleHomeLayoutBinding
 import com.mahshad.authenticatorapp.home.data.home.model.repository.Article
+import io.reactivex.Observable
 
-class ArticleAdapter(private val articleList: List<Article>) :
+class ArticleAdapter(
+    private val articleList: List<Article>,
+    private val fragmentNotify: (() -> Observable<Unit>) -> Unit
+) :
     RecyclerView.Adapter<ArticleViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
@@ -18,7 +23,9 @@ class ArticleAdapter(private val articleList: List<Article>) :
             parent,
             false
         )
-        return ArticleViewHolder(binding)
+        val articleViewHolder = ArticleViewHolder(binding)
+        fragmentNotify { articleViewHolder.likeIcon.clicks() }
+        return articleViewHolder
     }
 
     override fun getItemCount(): Int = articleList.size
@@ -33,10 +40,10 @@ class ArticleAdapter(private val articleList: List<Article>) :
     }
 }
 
-class ArticleViewHolder(article: ArticleHomeLayoutBinding) :
-    RecyclerView.ViewHolder(article.root) {
+class ArticleViewHolder(article: ArticleHomeLayoutBinding) : RecyclerView.ViewHolder(article.root) {
     val image: ImageView = article.itemImage
     val title: TextView = article.itemTitle
     val author: TextView = article.itemAuthor
     val publishAt: TextView = article.itemPublishAt
+    val likeIcon: ImageView = article.likeIcon
 }

@@ -45,6 +45,13 @@ class HomePresenter @Inject constructor(
                 })
     }
 
+    override fun updateLikedArticles(likeIconObservable: Observable<Unit>?) {
+        likeIconObservable?.subscribe {
+            Log.d("TAG", "updateLikedArticles: likebutton is clicked")
+        }
+
+    }
+
     override fun attachView(view: HomeContract.View) {
         this.view = view
     }

@@ -25,6 +25,7 @@ class HomeFragment : Fragment(), HomeContract.View {
     private lateinit var progressBar: ProgressBar
     private lateinit var searchBar: EditText
     private lateinit var searchBarObservable: Observable<CharSequence>
+    private var likeIconObservable: Observable<Unit>? = null
     private lateinit var myContext: Context
 
     @Inject
@@ -67,7 +68,8 @@ class HomeFragment : Fragment(), HomeContract.View {
     }
 
     override fun showArticles(articles: List<Article>) {
-        recyclerView.adapter = ArticleAdapter(articles)
+        recyclerView.adapter =
+            ArticleAdapter(articles, ::fragmentNotify)
     }
 
     override fun showErrorMessage(error: String) {
@@ -76,5 +78,10 @@ class HomeFragment : Fragment(), HomeContract.View {
 
     override fun showSuccessMessage() {
         TODO("Not yet implemented")
+    }
+
+    fun fragmentNotify(likeClickObsGetter: () -> Observable<Unit>) {
+        likeIconObservable = likeClickObsGetter()
+        presenter.updateLikedArticles(likeIconObservable)
     }
 }

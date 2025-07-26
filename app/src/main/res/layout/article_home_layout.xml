@@ -68,7 +68,7 @@
             android:paddingStart="16dp"
             android:paddingTop="8dp"
             android:paddingEnd="16dp"
-            android:text="Beautiful Landscape View"
+            android:text="@string/beautiful_landscape_view"
             android:textAppearance="?attr/textAppearanceHeadline6"
             android:textColor="?attr/colorOnSurface" />
 
@@ -81,7 +81,7 @@
             android:maxLines="3"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:text="Captured in the serene mountains of Alberta, Canada."
+            android:text="@string/captured_in_the_serene_mountains_of_alberta_canada"
             android:textAppearance="?attr/textAppearanceBody2"
             android:textColor="?attr/colorOnSurfaceVariant" />
 
@@ -93,9 +93,9 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:paddingBottom="8dp"
-            android:text="2 hours ago"
+            android:text="@string/_2_hours_ago"
             android:textAppearance="?attr/textAppearanceCaption"
-            android:textColor="?attr/colorOnSurfaceVariant" /> <!-- Add padding to the bottom of the card content -->
+            android:textColor="?attr/colorOnSurfaceVariant" />
 
     </LinearLayout>
 
