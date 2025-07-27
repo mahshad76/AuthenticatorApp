@@ -6,4 +6,5 @@ import io.reactivex.Single
 
 interface ArticleRepository {
     fun getArticles(): Single<List<Article>>
+    fun updateLikedArticles(article: Article)
 }

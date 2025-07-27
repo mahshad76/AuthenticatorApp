@@ -8,6 +8,7 @@ import com.mahshad.authenticatorapp.home.data.home.repository.ArticleRepository
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.disposables.Disposable
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -49,13 +50,13 @@ class HomePresenter @Inject constructor(
         getArticle: () -> Article,
         likeIconObservable: Observable<Unit>?
     ) {
-        likeIconObservable?.subscribe {
-            Log.d(
-                "TAG", "updateLikedArticles: likebutton is clicked with the title of " +
-                        "${getArticle().title}"
-            )
-        }
-
+        likeIconObservable
+            ?.throttleFirst(500, TimeUnit.MILLISECONDS)
+            ?.observeOn(ioScheduler)
+            ?.subscribe {
+                val article = getArticle.invoke()
+                articleRepository.updateLikedArticles(article.copy(isLiked = !article.isLiked))
+            }
     }
 
     override fun attachView(view: HomeContract.View) {
