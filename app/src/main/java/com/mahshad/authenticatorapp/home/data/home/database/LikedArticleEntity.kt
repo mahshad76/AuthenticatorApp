@@ -6,9 +6,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "liked_articles")
 data class LikedArticleEntity(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @PrimaryKey @ColumnInfo(name = "article_title") val title: String = " ",
     @ColumnInfo(name = "article_author") val author: String?,
     @ColumnInfo(name = "published_date") val publishedAt: String?,
-    @ColumnInfo(name = "article_title") val title: String?,
     @ColumnInfo(name = "image_url") val urlToImage: String?
 )

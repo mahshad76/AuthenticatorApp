@@ -5,6 +5,8 @@ import com.mahshad.authenticatorapp.di.IoScheduler
 import com.mahshad.authenticatorapp.di.MainScheduler
 import com.mahshad.authenticatorapp.home.data.home.model.repository.Article
 import com.mahshad.authenticatorapp.home.data.home.repository.ArticleRepository
+import io.reactivex.BackpressureStrategy
+import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.disposables.Disposable
@@ -22,9 +24,9 @@ class HomePresenter @Inject constructor(
 
     override fun getArticles(searchQuery: Observable<CharSequence>): Disposable {
         view?.showLoading()
-        return Observable.combineLatest(
-            articleRepository.getArticles().toObservable(),
-            searchQuery
+        return Flowable.combineLatest(
+            articleRepository.getArticles(),
+            searchQuery.toFlowable(BackpressureStrategy.LATEST)
         ) { articles: List<Article>, query: CharSequence ->
             if (query.toString() == "") {
                 articles
@@ -55,7 +57,7 @@ class HomePresenter @Inject constructor(
             ?.observeOn(ioScheduler)
             ?.subscribe {
                 val article = getArticle.invoke()
-                articleRepository.updateLikedArticles(article.copy(isLiked = !article.isLiked))
+                articleRepository.updateLikedArticles(article)
             }
     }
 

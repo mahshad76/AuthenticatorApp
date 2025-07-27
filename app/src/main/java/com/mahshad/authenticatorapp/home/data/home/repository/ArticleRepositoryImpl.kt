@@ -5,13 +5,13 @@ import com.mahshad.authenticatorapp.di.ComputationScheduler
 import com.mahshad.authenticatorapp.di.IoScheduler
 import com.mahshad.authenticatorapp.di.MainScheduler
 import com.mahshad.authenticatorapp.home.data.home.database.ArticleDatabase
+import com.mahshad.authenticatorapp.home.data.home.database.LikedArticleEntity
 import com.mahshad.authenticatorapp.home.data.home.model.remote.toArticle
 import com.mahshad.authenticatorapp.home.data.home.model.repository.Article
 import com.mahshad.authenticatorapp.home.data.home.model.repository.toArticleEntity
 import com.mahshad.authenticatorapp.home.network.home.ApiService
+import io.reactivex.Flowable
 import io.reactivex.Scheduler
-import io.reactivex.Single
-import io.reactivex.subjects.ReplaySubject
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -24,8 +24,7 @@ class ArticleRepositoryImpl @Inject constructor(
     @IoScheduler private val ioScheduler: Scheduler,
     @MainScheduler private val mainScheduler: Scheduler
 ) : ArticleRepository {
-    override fun getArticles(): Single<List<Article>> {
-        ///combine the single got from the db with the server
+    override fun getArticles(): Flowable<List<Article>> {
         val remoteArticleObservable = apiService
             .getRecentArticles("apple")
             .map { response ->
@@ -36,44 +35,60 @@ class ArticleRepositoryImpl @Inject constructor(
                 } else {
                     emptyList<Article>()
                 }
-            }
+            }.toFlowable()
             .subscribeOn(ioScheduler)
-        val subject = ReplaySubject.create<List<Article>>()
-        remoteArticleObservable.toObservable().subscribe(subject)
-        return apiService
-            .getRecentArticles("apple")
-            .map { response ->
-                if (response.isSuccessful) {
-                    response.body()?.articles?.map { articleDTO ->
-                        articleDTO.toArticle()
-                    } ?: emptyList<Article>()
+
+        return Flowable.combineLatest(
+            remoteArticleObservable,
+            articleDatabase.Dao().getAllUsers()
+        ) { remoteArticles: List<Article>, localArticles: List<LikedArticleEntity> ->
+            remoteArticles.map { article ->
+                if ((article.title) in (localArticles.map { it.title })) {
+                    article.copy(isLiked = true)
                 } else {
-                    emptyList<Article>()
+                    article.copy(isLiked = false)
                 }
             }
-            .subscribeOn(ioScheduler)
+        }.subscribeOn(computationScheduler)
     }
 
     override fun updateLikedArticles(article: Article) {
-        if (article.isLiked) {
-            articleDatabase.Dao().insert(article.toArticleEntity())
-                .subscribeOn(ioScheduler)
-                .subscribe(
-                    { Log.d("TAG", "successful insertion to the db") },
-                    { error: Throwable ->
-                        Log.e("TAG", "unsuccessful insertion to the db: ${error.message}")
-                    }
-                )
+        val articleEntity = article.toArticleEntity()
+        val dao = articleDatabase.Dao()
 
+        val databaseOperation = if (article.isLiked) {
+            dao.delete(articleEntity)
+                .doOnComplete {
+                    Log.d(
+                        "ArticleAction",
+                        "Successfully deleted '${article.title}' from liked articles."
+                    )
+                }
+                .doOnError { error ->
+                    Log.e(
+                        "ArticleAction",
+                        "Failed to delete '${article.title}': ${error.message}"
+                    )
+                }
         } else {
-            articleDatabase.Dao().delete(article.toArticleEntity())
-                .subscribeOn(ioScheduler)
-                .subscribe(
-                    { Log.d("TAG", "successful insertion to the db") },
-                    { error: Throwable ->
-                        Log.e("TAG", "unsuccessful insertion to the db: ${error.message}")
-                    }
-                )
+            dao.insert(articleEntity)
+                .doOnComplete {
+                    Log.d(
+                        "ArticleAction",
+                        "Successfully inserted '${article.title}' to liked articles."
+                    )
+                }
+                .doOnError { error ->
+                    Log.e(
+                        "ArticleAction",
+                        "Failed to insert '${article.title}': ${error.message}"
+                    )
+                }
         }
+
+        databaseOperation
+            .subscribeOn(ioScheduler)
+            .subscribe()
+
     }
 }

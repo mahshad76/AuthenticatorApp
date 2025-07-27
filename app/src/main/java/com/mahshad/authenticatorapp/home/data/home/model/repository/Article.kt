@@ -13,6 +13,6 @@ data class Article(
 fun Article.toArticleEntity() = LikedArticleEntity(
     author = this.author,
     publishedAt = this.publishedAt,
-    title = this.title,
+    title = this.title?:" ",
     urlToImage = this.urlToImage
 )

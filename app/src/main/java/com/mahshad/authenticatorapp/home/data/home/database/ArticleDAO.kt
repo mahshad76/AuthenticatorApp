@@ -6,7 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import io.reactivex.Completable
-import io.reactivex.Single
+import io.reactivex.Flowable
 
 @Dao
 interface ArticleDAO {
@@ -14,7 +14,7 @@ interface ArticleDAO {
     fun insert(article: LikedArticleEntity): Completable
 
     @Query("SELECT * FROM liked_articles")
-    fun getAllUsers(): Single<List<LikedArticleEntity>>
+    fun getAllUsers(): Flowable<List<LikedArticleEntity>>
 
     @Delete
     fun delete(article: LikedArticleEntity): Completable
