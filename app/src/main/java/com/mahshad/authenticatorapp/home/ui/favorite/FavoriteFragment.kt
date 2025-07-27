@@ -1,15 +1,15 @@
-package com.mahshad.authenticatorapp.home.ui.dashboard
+package com.mahshad.authenticatorapp.home.ui.favorite
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.mahshad.authenticatorapp.databinding.FragmentDashboardBinding
+import com.mahshad.authenticatorapp.databinding.FragmentFavoriteBinding
 
-class DashboardFragment : Fragment() {
+class FavoriteFragment : Fragment(), FavoriteContract.View {
 
-    private lateinit var _binding: FragmentDashboardBinding
+    private lateinit var _binding: FragmentFavoriteBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -17,7 +17,7 @@ class DashboardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentDashboardBinding.inflate(inflater)
+        _binding = FragmentFavoriteBinding.inflate(inflater)
         return _binding.root
     }
 
