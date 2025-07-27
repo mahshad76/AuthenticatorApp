@@ -29,9 +29,10 @@ class ArticleRepositoryImpl @Inject constructor(
             .getRecentArticles("apple")
             .map { response ->
                 if (response.isSuccessful) {
-                    response.body()?.articles?.map { articleDTO ->
-                        articleDTO.toArticle()
-                    } ?: emptyList<Article>()
+                    response.body()?.articles
+                        ?.map { articleDTO -> articleDTO.toArticle() }
+                        ?.sortedByDescending { it.publishedAt }
+                        ?: emptyList<Article>()
                 } else {
                     emptyList<Article>()
                 }
