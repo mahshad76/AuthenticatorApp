@@ -89,6 +89,5 @@ class ArticleRepositoryImpl @Inject constructor(
         databaseOperation
             .subscribeOn(ioScheduler)
             .subscribe()
-
     }
 }
