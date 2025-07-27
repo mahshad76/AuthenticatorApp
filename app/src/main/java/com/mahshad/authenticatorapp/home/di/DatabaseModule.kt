@@ -2,7 +2,7 @@ package com.mahshad.authenticatorapp.home.di
 
 import android.content.Context
 import androidx.room.Room
-import com.mahshad.authenticatorapp.home.data.home.database.ArticleDatabase
+import com.mahshad.authenticatorapp.home.data.database.ArticleDatabase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

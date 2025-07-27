@@ -9,6 +9,6 @@ interface FavoriteContract {
     }
 
     interface Presenter : BasePresenter<View> {
-
+        fun getFavoriteArticles()
     }
 }

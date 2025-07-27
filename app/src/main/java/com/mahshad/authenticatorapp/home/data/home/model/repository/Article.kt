@@ -1,6 +1,6 @@
 package com.mahshad.authenticatorapp.home.data.home.model.repository
 
-import com.mahshad.authenticatorapp.home.data.home.database.LikedArticleEntity
+import com.mahshad.authenticatorapp.home.data.database.LikedArticleEntity
 
 data class Article(
     val author: String?,

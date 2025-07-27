@@ -4,8 +4,8 @@ import android.util.Log
 import com.mahshad.authenticatorapp.di.ComputationScheduler
 import com.mahshad.authenticatorapp.di.IoScheduler
 import com.mahshad.authenticatorapp.di.MainScheduler
-import com.mahshad.authenticatorapp.home.data.home.database.ArticleDatabase
-import com.mahshad.authenticatorapp.home.data.home.database.LikedArticleEntity
+import com.mahshad.authenticatorapp.home.data.database.ArticleDatabase
+import com.mahshad.authenticatorapp.home.data.database.LikedArticleEntity
 import com.mahshad.authenticatorapp.home.data.home.model.remote.toArticle
 import com.mahshad.authenticatorapp.home.data.home.model.repository.Article
 import com.mahshad.authenticatorapp.home.data.home.model.repository.toArticleEntity
@@ -41,7 +41,7 @@ class ArticleRepositoryImpl @Inject constructor(
 
         return Flowable.combineLatest(
             remoteArticleObservable,
-            articleDatabase.Dao().getAllUsers()
+            articleDatabase.Dao().getAllArticles()
         ) { remoteArticles: List<Article>, localArticles: List<LikedArticleEntity> ->
             remoteArticles.map { article ->
                 if ((article.title) in (localArticles.map { it.title })) {

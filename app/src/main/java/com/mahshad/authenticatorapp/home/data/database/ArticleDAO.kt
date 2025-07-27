@@ -1,4 +1,4 @@
-package com.mahshad.authenticatorapp.home.data.home.database
+package com.mahshad.authenticatorapp.home.data.database
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -14,7 +14,7 @@ interface ArticleDAO {
     fun insert(article: LikedArticleEntity): Completable
 
     @Query("SELECT * FROM liked_articles")
-    fun getAllUsers(): Flowable<List<LikedArticleEntity>>
+    fun getAllArticles(): Flowable<List<LikedArticleEntity>>
 
     @Delete
     fun delete(article: LikedArticleEntity): Completable

@@ -1,4 +1,4 @@
-package com.mahshad.authenticatorapp.home.data.home.database
+package com.mahshad.authenticatorapp.home.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
