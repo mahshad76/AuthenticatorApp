@@ -32,7 +32,7 @@ class HomePresenter @Inject constructor(
                 articles
             } else {
                 articles.filter { article ->
-                    article.title?.contains(query.toString()) ?: false
+                    article.title?.lowercase()?.contains(query.toString().lowercase()) ?: false
                 }
             }
         }
