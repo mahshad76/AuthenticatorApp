@@ -11,3 +11,13 @@ annotation class WelcomeActivityScope
 @MustBeDocumented
 @Retention(value = AnnotationRetention.RUNTIME)
 annotation class LoginFragmentScope
+
+@Scope
+@MustBeDocumented
+@Retention(value = AnnotationRetention.RUNTIME)
+annotation class SignUpFragmentScope
+
+@Scope
+@MustBeDocumented
+@Retention(value = AnnotationRetention.RUNTIME)
+annotation class ForgetPasswordFragmentScope
