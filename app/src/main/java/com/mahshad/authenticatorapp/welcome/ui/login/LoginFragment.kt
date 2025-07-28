@@ -12,7 +12,6 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.textChanges
 import com.mahshad.authenticatorapp.R
@@ -21,11 +20,11 @@ import com.mahshad.authenticatorapp.databinding.FragmentLoginBinding
 import com.mahshad.authenticatorapp.home.HomeActivity
 import com.mahshad.authenticatorapp.welcome.ui.forgetpassword.ForgetPasswordFragment
 import com.mahshad.authenticatorapp.welcome.ui.signup.SignUpFragment
-import dagger.android.support.AndroidSupportInjection
+import dagger.android.support.DaggerFragment
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class LoginFragment : Fragment(), Contract.View {
+class LoginFragment : DaggerFragment(), Contract.View {
 
     private lateinit var loginFragment: FragmentLoginBinding
     private lateinit var usernameText: EditText
@@ -46,7 +45,7 @@ class LoginFragment : Fragment(), Contract.View {
     }
 
     override fun onAttach(context: Context) {
-        AndroidSupportInjection.inject(this)
+        ///AndroidSupportInjection.inject(this)
         super.onAttach(context)
         myContext = context
     }

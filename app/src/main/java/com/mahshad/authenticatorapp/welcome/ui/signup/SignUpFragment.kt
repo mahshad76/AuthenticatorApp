@@ -9,15 +9,14 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.textChanges
 import com.mahshad.authenticatorapp.databinding.FragmentSignUpBinding
-import dagger.android.support.AndroidSupportInjection
+import dagger.android.support.DaggerFragment
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class SignUpFragment : Fragment(), SignUpContract.SignUpView {
+class SignUpFragment : DaggerFragment(), SignUpContract.SignUpView {
 
     private lateinit var signUpFragment: FragmentSignUpBinding
     private lateinit var usernameEditText: EditText
@@ -35,12 +34,6 @@ class SignUpFragment : Fragment(), SignUpContract.SignUpView {
 
     @Inject
     lateinit var presenter: SignUpContract.SignUpPresenter
-
-    override fun onAttach(context: Context) {
-        AndroidSupportInjection.inject(this)
-        myContext = context
-        super.onAttach(context)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,14 +78,14 @@ class SignUpFragment : Fragment(), SignUpContract.SignUpView {
 
     override fun showSuccessfulSignup() {
         Toast.makeText(
-            myContext, "Successful signup",
+            requireContext(), "Successful signup",
             Toast.LENGTH_SHORT
         ).show()
     }
 
     override fun unsuccessfulSignUp() {
         Toast.makeText(
-            myContext, "The user already exists",
+            requireContext(), "The user already exists",
             Toast.LENGTH_SHORT
         ).show()
     }

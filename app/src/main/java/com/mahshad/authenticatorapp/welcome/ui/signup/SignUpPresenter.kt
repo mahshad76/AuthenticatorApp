@@ -5,13 +5,13 @@ import com.mahshad.authenticatorapp.common.BasePresenterExtensions.processEditTe
 import com.mahshad.authenticatorapp.di.IoScheduler
 import com.mahshad.authenticatorapp.di.MainScheduler
 import com.mahshad.authenticatorapp.welcome.data.localdatasource.UserSharedPref
+import com.mahshad.authenticatorapp.welcome.di.SignUpFragmentScope
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
+@SignUpFragmentScope
 class SignUpPresenter @Inject constructor(
     private val userSharedPref: UserSharedPref,
     @IoScheduler private val ioScheduler: Scheduler,

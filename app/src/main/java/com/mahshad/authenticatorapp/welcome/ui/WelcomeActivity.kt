@@ -8,19 +8,13 @@ import androidx.core.view.WindowInsetsCompat
 import com.mahshad.authenticatorapp.R
 import com.mahshad.authenticatorapp.common.AppCompatActivityExtensions.replaceFragment
 import com.mahshad.authenticatorapp.databinding.ActivityMainBinding
-import com.mahshad.authenticatorapp.welcome.ui.login.Contract
 import com.mahshad.authenticatorapp.welcome.ui.login.LoginFragment
-import dagger.android.AndroidInjection
-import javax.inject.Inject
 
 class WelcomeActivity : AppCompatActivity() {
     private lateinit var activityHomeBinding: ActivityMainBinding
 
-    @Inject
-    lateinit var presenter: Contract.Presenter
-
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
+        //AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         activityHomeBinding = ActivityMainBinding.inflate(layoutInflater)

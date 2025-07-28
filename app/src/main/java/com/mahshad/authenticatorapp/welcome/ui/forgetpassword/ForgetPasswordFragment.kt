@@ -9,15 +9,14 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.textChanges
 import com.mahshad.authenticatorapp.databinding.FragmentForgetPasswordBinding
-import dagger.android.support.AndroidSupportInjection
+import dagger.android.support.DaggerFragment
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class ForgetPasswordFragment : Fragment(), ForgotPassContract.View {
+class ForgetPasswordFragment : DaggerFragment(), ForgotPassContract.View {
     private lateinit var fragmentForgetPasswordBinding: FragmentForgetPasswordBinding
     private lateinit var passwordText: EditText
     private lateinit var passwordTextObservable: Observable<CharSequence>
@@ -32,7 +31,7 @@ class ForgetPasswordFragment : Fragment(), ForgotPassContract.View {
     lateinit var presenter: ForgotPassContract.Presenter
 
     override fun onAttach(context: Context) {
-        AndroidSupportInjection.inject(this)
+        ////AndroidSupportInjection.inject(this)
         myContext = context
         super.onAttach(context)
     }

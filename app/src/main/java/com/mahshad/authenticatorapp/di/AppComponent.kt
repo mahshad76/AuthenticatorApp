@@ -10,7 +10,6 @@ import com.mahshad.authenticatorapp.home.di.NetworkModule
 import com.mahshad.authenticatorapp.welcome.data.localdatasource.UserSharedPrefModule
 import com.mahshad.authenticatorapp.welcome.di.ActivityBuildersModule
 import com.mahshad.authenticatorapp.welcome.di.FragmentBuildersModule
-import com.mahshad.authenticatorapp.welcome.di.PresenterModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
@@ -24,7 +23,7 @@ import javax.inject.Singleton
         UserSharedPrefModule::class,
         ActivityBuildersModule::class,
         FragmentBuildersModule::class,
-        PresenterModule::class,
+        //PresenterModule::class,
         NetworkModule::class,
         HomePresenterModule::class,
         HomeActivityBuildersModule::class,

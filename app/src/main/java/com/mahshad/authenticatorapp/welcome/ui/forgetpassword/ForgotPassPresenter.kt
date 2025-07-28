@@ -5,14 +5,14 @@ import com.mahshad.authenticatorapp.common.BasePresenterExtensions.processEditTe
 import com.mahshad.authenticatorapp.di.IoScheduler
 import com.mahshad.authenticatorapp.di.MainScheduler
 import com.mahshad.authenticatorapp.welcome.data.localdatasource.UserSharedPref
+import com.mahshad.authenticatorapp.welcome.di.ForgetPasswordFragmentScope
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.disposables.Disposable
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
+@ForgetPasswordFragmentScope
 class ForgotPassPresenter @Inject constructor(
     private val userSharePref: UserSharedPref,
     @IoScheduler private val ioScheduler: Scheduler,
