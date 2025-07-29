@@ -5,6 +5,7 @@ import com.mahshad.authenticatorapp.di.IoScheduler
 import com.mahshad.authenticatorapp.di.MainScheduler
 import com.mahshad.authenticatorapp.home.data.home.model.repository.Article
 import com.mahshad.authenticatorapp.home.data.home.repository.ArticleRepository
+import com.mahshad.authenticatorapp.home.di.home.Scopes
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.Observable
@@ -12,9 +13,8 @@ import io.reactivex.Scheduler
 import io.reactivex.disposables.Disposable
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
+@Scopes.HomeFragmentScope
 class HomePresenter @Inject constructor(
     private val articleRepository: ArticleRepository,
     @MainScheduler private val mainScheduler: Scheduler,

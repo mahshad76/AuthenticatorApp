@@ -8,17 +8,16 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ProgressBar
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jakewharton.rxbinding3.widget.textChanges
 import com.mahshad.authenticatorapp.databinding.FragmentHomeBinding
 import com.mahshad.authenticatorapp.home.data.home.model.repository.Article
-import dagger.android.support.AndroidSupportInjection
+import dagger.android.support.DaggerFragment
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class HomeFragment : Fragment(), HomeContract.View {
+class HomeFragment : DaggerFragment(), HomeContract.View {
 
     private lateinit var _binding: FragmentHomeBinding
     private lateinit var recyclerView: RecyclerView
@@ -32,7 +31,6 @@ class HomeFragment : Fragment(), HomeContract.View {
     lateinit var presenter: HomeContract.Presenter
 
     override fun onAttach(context: Context) {
-        AndroidSupportInjection.inject(this)
         super.onAttach(context)
         myContext = context
         presenter.attachView(this)

@@ -1,4 +1,4 @@
-package com.mahshad.authenticatorapp.home.di
+package com.mahshad.authenticatorapp.di
 
 import com.google.gson.Gson
 import com.mahshad.authenticatorapp.BuildConfig

@@ -1,4 +1,4 @@
-package com.mahshad.authenticatorapp.home.di
+package com.mahshad.authenticatorapp.di
 
 import android.content.Context
 import androidx.room.Room

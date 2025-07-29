@@ -2,11 +2,8 @@ package com.mahshad.authenticatorapp.di
 
 import android.content.Context
 import com.mahshad.authenticatorapp.MyApplication
-import com.mahshad.authenticatorapp.home.di.DatabaseModule
 import com.mahshad.authenticatorapp.home.di.HomeActivityBuildersModule
 import com.mahshad.authenticatorapp.home.di.HomeFragmentBuildersModule
-import com.mahshad.authenticatorapp.home.di.HomePresenterModule
-import com.mahshad.authenticatorapp.home.di.NetworkModule
 import com.mahshad.authenticatorapp.welcome.data.localdatasource.UserSharedPrefModule
 import com.mahshad.authenticatorapp.welcome.di.ActivityBuildersModule
 import com.mahshad.authenticatorapp.welcome.di.FragmentBuildersModule
@@ -23,9 +20,7 @@ import javax.inject.Singleton
         UserSharedPrefModule::class,
         ActivityBuildersModule::class,
         FragmentBuildersModule::class,
-        //PresenterModule::class,
         NetworkModule::class,
-        HomePresenterModule::class,
         HomeActivityBuildersModule::class,
         HomeFragmentBuildersModule::class,
         RepositoryModule::class,
