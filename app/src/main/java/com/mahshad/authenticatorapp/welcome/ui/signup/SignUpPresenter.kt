@@ -5,9 +5,11 @@ import com.mahshad.authenticatorapp.common.BasePresenterExtensions.processEditTe
 import com.mahshad.authenticatorapp.di.IoScheduler
 import com.mahshad.authenticatorapp.di.MainScheduler
 import com.mahshad.authenticatorapp.welcome.data.localdatasource.UserSharedPref
+import com.mahshad.authenticatorapp.welcome.di.SignUpFragmentDisposable
 import com.mahshad.authenticatorapp.welcome.di.SignUpFragmentScope
 import io.reactivex.Observable
 import io.reactivex.Scheduler
+import io.reactivex.disposables.CompositeDisposable
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -15,7 +17,8 @@ import javax.inject.Inject
 class SignUpPresenter @Inject constructor(
     private val userSharedPref: UserSharedPref,
     @IoScheduler private val ioScheduler: Scheduler,
-    @MainScheduler private val mainScheduler: Scheduler
+    @MainScheduler private val mainScheduler: Scheduler,
+    @SignUpFragmentDisposable private val compositeDisposable: CompositeDisposable
 ) : SignUpContract.SignUpPresenter {
 
     private var view: SignUpContract.SignUpView? = null
@@ -26,16 +29,20 @@ class SignUpPresenter @Inject constructor(
         passwordObservable: Observable<CharSequence>,
         phoneObservable: Observable<CharSequence>
     ) {
-        Observable.combineLatest(
+        val disposable = Observable.combineLatest(
             processEditTextFlow(usernameObservable),
             processEditTextFlow(fullNameObservable),
             processEditTextFlow(passwordObservable),
             processEditTextFlow(phoneObservable)
         ) { username: String, fullName: String, password: String, phone: String ->
             username.length > 7 && fullName.length > 6 && password.length > 7 && phone.length == 10
-        }.subscribeOn(ioScheduler).observeOn(mainScheduler).subscribe { isValid: Boolean ->
-            view?.setSignUpButtonEnabled(isValid)
         }
+            .subscribeOn(ioScheduler)
+            .observeOn(mainScheduler)
+            .subscribe { isValid: Boolean ->
+                view?.setSignUpButtonEnabled(isValid)
+            }
+        compositeDisposable.add(disposable)
     }
 
     override fun signUpCheck(
@@ -45,7 +52,7 @@ class SignUpPresenter @Inject constructor(
         getPassword: () -> String,
         getPhone: () -> String
     ) {
-        buttonObservable
+        val disposable = buttonObservable
             .throttleFirst(500, TimeUnit.MILLISECONDS)
             .observeOn(mainScheduler)
             .map {
@@ -76,6 +83,7 @@ class SignUpPresenter @Inject constructor(
             }, { error: Throwable ->
                 Log.e("SignUpCheck", "Error during sign up check: ${error.message}", error)
             })
+        compositeDisposable.add(disposable)
     }
 
     override fun attachView(view: SignUpContract.SignUpView) {
@@ -83,10 +91,10 @@ class SignUpPresenter @Inject constructor(
     }
 
     override fun detachView() {
-        TODO("Not yet implemented")
+        view = null
     }
 
     override fun destroyView() {
-        TODO("Not yet implemented")
+        compositeDisposable.clear()
     }
 }
