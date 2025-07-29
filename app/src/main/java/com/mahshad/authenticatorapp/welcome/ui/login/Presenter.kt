@@ -5,10 +5,11 @@ import com.mahshad.authenticatorapp.common.BasePresenterExtensions.processEditTe
 import com.mahshad.authenticatorapp.di.IoScheduler
 import com.mahshad.authenticatorapp.di.MainScheduler
 import com.mahshad.authenticatorapp.welcome.data.localdatasource.UserSharedPref
+import com.mahshad.authenticatorapp.welcome.di.LoginFragmentDisposable
 import com.mahshad.authenticatorapp.welcome.di.LoginFragmentScope
 import io.reactivex.Observable
 import io.reactivex.Scheduler
-import io.reactivex.disposables.Disposable
+import io.reactivex.disposables.CompositeDisposable
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -16,7 +17,8 @@ import javax.inject.Inject
 class Presenter @Inject constructor(
     @IoScheduler private val ioScheduler: Scheduler,
     @MainScheduler private val mainScheduler: Scheduler,
-    private val userSharedPref: UserSharedPref
+    private val userSharedPref: UserSharedPref,
+    @LoginFragmentDisposable private val compositeDisposable: CompositeDisposable
 ) :
     Contract.Presenter {
     private var view: Contract.View? = null
@@ -30,15 +32,14 @@ class Presenter @Inject constructor(
     }
 
     override fun destroyView() {
-        TODO("Not yet implemented")
+        compositeDisposable.clear()
     }
-    //you need to add the subscriptions to the disposable array to clear them as the view is destroyed.
 
     override fun loginValidationFlow(
         usernameObservable: Observable<CharSequence>,
         passwordObservable: Observable<CharSequence>
-    ): Disposable? {
-        return Observable.combineLatest(
+    ) {
+        val disposable = Observable.combineLatest(
             processEditTextFlow(usernameObservable),
             processEditTextFlow(passwordObservable)
         ) { username: String, password: String ->
@@ -52,10 +53,11 @@ class Presenter @Inject constructor(
                 Log.d("loginValidationFlow", "loginValidationFlow: ${isEnabled} ")
             }, { error: Throwable -> "loginValidationFlowError:${error}" }
             )
+        compositeDisposable.add(disposable)
     }
 
     override fun loginCheck(buttonObservable: Observable<Unit>) {
-        buttonObservable
+        val disposable = buttonObservable
             .throttleFirst(500, TimeUnit.MILLISECONDS)
             .observeOn(mainScheduler)
             .switchMapSingle {
@@ -74,5 +76,6 @@ class Presenter @Inject constructor(
             .subscribe({ isValid: Boolean ->
                 if (isValid) view?.showLoginSuccess() else view?.showLoginError()
             }, { error: Throwable -> Log.e("TAG", "loginCheckError: ${error.message}") })
+        compositeDisposable.add(disposable)
     }
 }

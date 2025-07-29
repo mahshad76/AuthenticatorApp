@@ -3,7 +3,6 @@ package com.mahshad.authenticatorapp.welcome.ui.login
 import com.mahshad.authenticatorapp.common.BasePresenter
 import com.mahshad.authenticatorapp.common.BaseView
 import io.reactivex.Observable
-import io.reactivex.disposables.Disposable
 
 interface Contract {
     interface View : BaseView {
@@ -24,7 +23,7 @@ interface Contract {
         fun loginValidationFlow(
             usernameObservable: Observable<CharSequence>,
             passwordObservable: Observable<CharSequence>
-        ): Disposable?
+        )
 
         fun loginCheck(buttonObservable: Observable<Unit>)
     }

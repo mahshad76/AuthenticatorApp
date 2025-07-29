@@ -4,7 +4,6 @@ import com.mahshad.authenticatorapp.common.BasePresenter
 import com.mahshad.authenticatorapp.common.BaseView
 import com.mahshad.authenticatorapp.home.data.home.model.repository.Article
 import io.reactivex.Observable
-import io.reactivex.disposables.Disposable
 
 interface HomeContract {
     interface View : BaseView {
@@ -26,7 +25,7 @@ interface HomeContract {
      *  * and managing UI state (e.g., loading, error states).
      *  */
     interface Presenter : BasePresenter<View> {
-        fun getArticles(searchQuery: Observable<CharSequence>): Disposable
+        fun getArticles(searchQuery: Observable<CharSequence>)
         fun updateLikedArticles(getArticle: () -> Article, likeIconObservable: Observable<Unit>?)
     }
 }
