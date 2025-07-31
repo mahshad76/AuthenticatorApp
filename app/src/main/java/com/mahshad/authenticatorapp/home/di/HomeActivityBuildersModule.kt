@@ -9,7 +9,7 @@ import dagger.android.ContributesAndroidInjector
 abstract class HomeActivityBuildersModule {
     @Scopes.HomeActivityScope
     @ContributesAndroidInjector(
-        modules = [HomeActivityPresenterModule::class,
+        modules = [HomeActivityModule::class,
             HomeFragmentBuildersModule::class]
     )
     abstract fun contributeHomeActivity(): HomeActivity

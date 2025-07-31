@@ -1,5 +1,6 @@
 package com.mahshad.authenticatorapp.home.di.home
 
+import com.mahshad.authenticatorapp.home.di.HomeFragmentDisposable
 import com.mahshad.authenticatorapp.home.di.Scopes
 import com.mahshad.authenticatorapp.home.ui.home.HomeContract
 import com.mahshad.authenticatorapp.home.ui.home.HomePresenter
@@ -12,8 +13,7 @@ import io.reactivex.disposables.CompositeDisposable
 abstract class HomePresenterModule {
     @Binds
     @Scopes.HomeFragmentScope
-    abstract fun provideHomerPresenter(homePresenter: HomePresenter):
-            HomeContract.Presenter
+    abstract fun provideHomerPresenter(homePresenter: HomePresenter): HomeContract.Presenter
 
     companion object {
         @Provides

@@ -27,6 +27,7 @@ class HomeActivityPresenter @Inject constructor() : HomeActivityContract.Present
                         R.id.nav_host_fragment_activity_home2,
                         FavoriteFragment()
                     )
+
                     R.id.navigation_notifications -> {
                         Log.d("BottomNav", "Notifications selected")
                     }
