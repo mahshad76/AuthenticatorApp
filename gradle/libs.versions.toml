@@ -15,9 +15,9 @@ constraintlayout = "2.2.1"
 retrofit = "2.11.0"
 roomRuntime = "2.7.2"
 rxandroid = "2.1.1"
-rxbinding = "4.0.0"
 rxbindingAppcompat = "3.1.0"
 rxbindingCore = "3.1.0"
+rxbindingMaterialKotlin = "4.0.0"
 rxjava = "2.2.21"
 rxPreferences = "2.0.0"
 lifecycleLivedataKtx = "2.9.1"
@@ -51,18 +51,17 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 rx-preferences = { module = "com.f2prateek.rx.preferences2:rx-preferences", version.ref = "rxPreferences" }
 rxandroid = { module = "io.reactivex.rxjava2:rxandroid", version.ref = "rxandroid" }
-rxbinding = { module = "com.jakewharton.rxbinding3:rxbinding", version.ref = "rxbinding" }
-rxbinding-appcompat = { module = "com.jakewharton.rxbinding3:rxbinding-appcompat", version.ref = "rxbinding" }
 rxbinding-appcompat-v310 = { module = "com.jakewharton.rxbinding3:rxbinding-appcompat", version.ref = "rxbindingAppcompat" }
-rxbinding-core = { module = "com.jakewharton.rxbinding3:rxbinding-core", version.ref = "rxbinding" }
 rxbinding-core-v310 = { module = "com.jakewharton.rxbinding3:rxbinding-core", version.ref = "rxbindingCore" }
-rxbinding-material = { module = "com.jakewharton.rxbinding3:rxbinding-material", version.ref = "rxbinding" }
-rxbinding-recyclerview = { module = "com.jakewharton.rxbinding3:rxbinding-recyclerview", version.ref = "rxbinding" }
+rxbinding-material = { module = "com.jakewharton.rxbinding3:rxbinding-material", version.ref = "rxbindingAppcompat" }
+rxbinding-material-kotlin = { module = "com.jakewharton.rxbinding2:rxbinding-material-kotlin", version.ref = "rxbindingMaterialKotlin" }
+rxbinding2-rxbinding-material = { module = "com.jakewharton.rxbinding2:rxbinding-material", version.ref = "rxbindingMaterialKotlin" }
 rxjava = { module = "io.reactivex.rxjava2:rxjava", version.ref = "rxjava" }
 androidx-lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
 androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
 androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

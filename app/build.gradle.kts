@@ -71,6 +71,7 @@ dependencies {
     ///rxbinding
     implementation(libs.rxbinding.appcompat.v310)
     implementation(libs.rxbinding.core.v310)
+    implementation (libs.rxbinding.material)
 
     ///retrofit, gson converter, and okhttp3
     implementation(libs.retrofit)

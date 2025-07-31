@@ -12,9 +12,4 @@ class Scopes {
     @MustBeDocumented
     @Retention(value = AnnotationRetention.RUNTIME)
     annotation class HomeFragmentScope
-
-    @Scope
-    @MustBeDocumented
-    @Retention(value = AnnotationRetention.RUNTIME)
-    annotation class FavoriteFragmentScope
 }
