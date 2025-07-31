@@ -1,5 +1,6 @@
 package com.mahshad.authenticatorapp.home.di.home
 
+import com.mahshad.authenticatorapp.home.di.Scopes
 import com.mahshad.authenticatorapp.home.ui.home.HomeFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

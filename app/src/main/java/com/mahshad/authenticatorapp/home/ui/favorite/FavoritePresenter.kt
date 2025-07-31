@@ -2,7 +2,7 @@ package com.mahshad.authenticatorapp.home.ui.favorite
 
 import com.mahshad.authenticatorapp.di.MainScheduler
 import com.mahshad.authenticatorapp.home.data.favorite.repository.FavoriteRepository
-import com.mahshad.authenticatorapp.home.di.favorite.Scopes
+import com.mahshad.authenticatorapp.home.di.Scopes
 import io.reactivex.Scheduler
 import javax.inject.Inject
 

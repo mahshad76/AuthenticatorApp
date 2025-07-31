@@ -2,7 +2,7 @@ package com.mahshad.authenticatorapp.di
 
 import android.content.Context
 import com.mahshad.authenticatorapp.MyApplication
-import com.mahshad.authenticatorapp.home.di.home.HomeActivityBuildersModule
+import com.mahshad.authenticatorapp.home.di.HomeActivityBuildersModule
 import com.mahshad.authenticatorapp.home.di.home.HomeFragmentBuildersModule
 import com.mahshad.authenticatorapp.welcome.data.localdatasource.UserSharedPrefModule
 import com.mahshad.authenticatorapp.welcome.di.ActivityBuildersModule

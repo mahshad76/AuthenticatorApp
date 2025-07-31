@@ -1,4 +1,4 @@
-package com.mahshad.authenticatorapp.home.di.home
+package com.mahshad.authenticatorapp.home.di
 
 import javax.inject.Scope
 
@@ -12,4 +12,9 @@ class Scopes {
     @MustBeDocumented
     @Retention(value = AnnotationRetention.RUNTIME)
     annotation class HomeFragmentScope
+
+    @Scope
+    @MustBeDocumented
+    @Retention(value = AnnotationRetention.RUNTIME)
+    annotation class FavoriteFragmentScope
 }
