@@ -46,6 +46,7 @@ class ForgetPasswordFragment : DaggerFragment(), ForgotPassContract.View {
     }
 
     override fun onDestroyView() {
+        presenter.detachView()
         presenter.destroyView()
         super.onDestroyView()
     }

@@ -56,6 +56,7 @@ class LoginFragment : DaggerFragment(), Contract.View {
     }
 
     override fun onDestroyView() {
+        presenter.detachView()
         presenter.destroyView()
         super.onDestroyView()
     }

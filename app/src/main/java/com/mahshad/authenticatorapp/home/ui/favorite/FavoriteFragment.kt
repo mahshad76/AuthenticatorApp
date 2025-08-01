@@ -49,6 +49,7 @@ class FavoriteFragment : DaggerFragment(), FavoriteContract.View {
     }
 
     override fun onDestroyView() {
+        presenter.detachView()
         presenter.destroyView()
         super.onDestroyView()
     }
