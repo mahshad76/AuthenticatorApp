@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mahshad.authenticatorapp.databinding.FragmentFavoriteBinding
@@ -36,6 +37,9 @@ class FavoriteFragment : DaggerFragment(), FavoriteContract.View {
         _binding = FragmentFavoriteBinding.inflate(inflater)
         recyclerView = _binding.favoriteRecyclerView
         recyclerView.layoutManager = GridLayoutManager(myContext, 2)
+        progressBar = _binding.progressBar
+        presenter.attachView(this)
+        presenter.getFavoriteArticles()
         return _binding.root
     }
 
@@ -50,14 +54,14 @@ class FavoriteFragment : DaggerFragment(), FavoriteContract.View {
     }
 
     override fun showLoading() {
-        TODO("Not yet implemented")
+        progressBar.isVisible = true
     }
 
     override fun hideLoading() {
-        TODO("Not yet implemented")
+        progressBar.isVisible = false
     }
 
     override fun showFavoriteArticles(favoriteArticle: List<FavoriteArticle>) {
-        TODO("Not yet implemented")
+        recyclerView.adapter = FavoriteAdapter(favoriteArticle)
     }
 }

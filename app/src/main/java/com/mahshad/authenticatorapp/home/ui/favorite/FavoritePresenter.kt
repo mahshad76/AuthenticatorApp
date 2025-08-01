@@ -1,5 +1,6 @@
 package com.mahshad.authenticatorapp.home.ui.favorite
 
+import android.util.Log
 import com.mahshad.authenticatorapp.di.MainScheduler
 import com.mahshad.authenticatorapp.home.data.favorite.repository.FavoriteRepository
 import com.mahshad.authenticatorapp.home.di.HomeActivityDisposable
@@ -16,10 +17,17 @@ class FavoritePresenter @Inject constructor(
 ) : FavoriteContract.Presenter {
     var view: FavoriteContract.View? = null
     override fun getFavoriteArticles() {
-        ///TODO(calling the function in the view to shows the favorite articles)
+        view?.showLoading()
         repository.getFavoriteArticles()
-            .observeOn(mainScheduler)
-            .subscribe({ }, { })
+            .subscribe(
+                { favoriteArticles ->
+                    view?.hideLoading()
+                    view?.showFavoriteArticles(favoriteArticles)
+                },
+                { error: Throwable ->
+                    view?.hideLoading()
+                    Log.e("TAG", "getFavoriteArticlesError: ${error.message}")
+                })
     }
 
     override fun attachView(view: FavoriteContract.View) {
