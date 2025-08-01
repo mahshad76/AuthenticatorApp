@@ -16,6 +16,4 @@ data class LikedArticleEntity(
 fun LikedArticleEntity.toFavoriteArticle() = FavoriteArticle(
     title = this.title,
     urlToImage = this.urlToImage,
-    author = this.author,
-    publishedAt = this.publishedAt
 )
