@@ -72,6 +72,16 @@ class SignUpFragment : DaggerFragment(), SignUpContract.SignUpView {
         return signUpFragment.root
     }
 
+    override fun onDetach() {
+        presenter.detachView()
+        super.onDetach()
+    }
+
+    override fun onDestroyView() {
+        presenter.destroyView()
+        super.onDestroyView()
+    }
+
     override fun setSignUpButtonEnabled(isEnabled: Boolean) {
         signUpButton.isEnabled = isEnabled
     }

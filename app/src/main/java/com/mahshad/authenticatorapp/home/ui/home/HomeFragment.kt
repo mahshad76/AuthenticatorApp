@@ -53,7 +53,13 @@ class HomeFragment : DaggerFragment(), HomeContract.View {
         return root
     }
 
+    override fun onDetach() {
+        presenter.detachView()
+        super.onDetach()
+    }
+
     override fun onDestroyView() {
+        presenter.destroyView()
         super.onDestroyView()
     }
 

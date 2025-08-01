@@ -40,6 +40,16 @@ class ForgetPasswordFragment : DaggerFragment(), ForgotPassContract.View {
         super.onCreate(savedInstanceState)
     }
 
+    override fun onDetach() {
+        presenter.detachView()
+        super.onDetach()
+    }
+
+    override fun onDestroyView() {
+        presenter.destroyView()
+        super.onDestroyView()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
