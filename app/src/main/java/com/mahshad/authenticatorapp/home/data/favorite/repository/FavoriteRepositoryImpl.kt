@@ -28,7 +28,14 @@ class FavoriteRepositoryImpl @Inject constructor(
                                 { it.title },
                                 { it.author })
                         )
-                            .map { it.toFavoriteArticle() }
+                            .map {
+                                val favoriteArticle = it.toFavoriteArticle()
+                                favoriteArticle.copy(
+                                    title =
+                                        favoriteArticle.title.split(" ").take(4)
+                                            .joinToString(" ") + "..."
+                                )
+                            }
                     }
             }
             .observeOn(mainScheduler)
