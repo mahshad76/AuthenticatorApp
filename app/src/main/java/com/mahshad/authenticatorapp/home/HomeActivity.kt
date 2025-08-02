@@ -34,4 +34,10 @@ class HomeActivity : DaggerAppCompatActivity(), HomeActivityContract.View {
             presenter.replaceFragmentCall(bottomNavigationObs)
         }
     }
+
+    override fun onDestroy() {
+        presenter.detachView()
+        presenter.destroyView()
+        super.onDestroy()
+    }
 }
