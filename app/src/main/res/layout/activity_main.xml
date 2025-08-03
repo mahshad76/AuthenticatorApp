@@ -47,12 +47,18 @@
         </LinearLayout>
     </FrameLayout>
 
-    <FrameLayout
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@id/bottom_curve"
-        app:layout_constraintTop_toBottomOf="@id/top_curve" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_curve"
+        app:layout_constraintVertical_bias="0.0"
+        app:navGraph="@navigation/navigation_welcome_graph" />
 
     <View
         android:id="@+id/bottom_curve"
