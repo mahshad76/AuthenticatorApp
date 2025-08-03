@@ -80,6 +80,7 @@ class SignUpPresenter @Inject constructor(
                     userSharedPref.savePassword(password)
                     ///asking the view to replace the fragment with the login view and gives the new username and password
                     view?.showSuccessfulSignup()
+                    view?.navigateToLogin()
                 }
             }, { error: Throwable ->
                 Log.e("SignUpCheck", "Error during sign up check: ${error.message}", error)

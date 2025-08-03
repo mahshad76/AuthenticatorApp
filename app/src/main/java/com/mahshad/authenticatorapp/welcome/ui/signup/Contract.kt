@@ -9,7 +9,7 @@ interface SignUpContract {
         fun setSignUpButtonEnabled(isEnabled: Boolean)
         fun showSuccessfulSignup()
         fun unsuccessfulSignUp()
-        fun navigateToLogin(username: String, password: String)
+        fun navigateToLogin()
     }
 
     interface SignUpPresenter : BasePresenter<SignUpView> {

@@ -2,6 +2,7 @@ package com.mahshad.authenticatorapp.welcome.ui.signup
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +10,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.textChanges
+import com.mahshad.authenticatorapp.R
 import com.mahshad.authenticatorapp.databinding.FragmentSignUpBinding
 import dagger.android.support.DaggerFragment
 import io.reactivex.Observable
@@ -30,6 +34,7 @@ class SignUpFragment : DaggerFragment(), SignUpContract.SignUpView {
     private lateinit var signUpButton: Button
     private lateinit var signUpButtonObservable: Observable<Unit>
     private lateinit var navigateBack: TextView
+    private lateinit var navController: NavController
     private lateinit var myContext: Context
 
     @Inject
@@ -72,6 +77,11 @@ class SignUpFragment : DaggerFragment(), SignUpContract.SignUpView {
         return signUpFragment.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
+    }
+
     override fun onDetach() {
         presenter.detachView()
         super.onDetach()
@@ -101,7 +111,8 @@ class SignUpFragment : DaggerFragment(), SignUpContract.SignUpView {
         ).show()
     }
 
-    override fun navigateToLogin(username: String, password: String) {
-        //SignUpFragmentDirections
+    override fun navigateToLogin() {
+        Log.d("TAG", "navigateToLogin: nav back")
+        navController.navigate(R.id.navigate_from_signup_to_forgotPass)
     }
 }
