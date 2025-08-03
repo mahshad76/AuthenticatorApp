@@ -24,6 +24,7 @@ lifecycleLivedataKtx = "2.9.1"
 lifecycleViewmodelKtx = "2.9.1"
 navigationFragmentKtx = "2.9.0"
 navigationUiKtx = "2.9.0"
+navigation = "2.5.3"
 
 [libraries]
 adapter-rxjava2 = { module = "com.squareup.retrofit2:adapter-rxjava2", version.ref = "retrofit" }
@@ -66,4 +67,5 @@ androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+safe-args-kotlin = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }
 

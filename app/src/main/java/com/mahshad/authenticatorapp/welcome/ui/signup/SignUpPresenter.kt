@@ -78,6 +78,7 @@ class SignUpPresenter @Inject constructor(
                 } else {
                     userSharedPref.saveUsername(username)
                     userSharedPref.savePassword(password)
+                    ///asking the view to replace the fragment with the login view and gives the new username and password
                     view?.showSuccessfulSignup()
                 }
             }, { error: Throwable ->

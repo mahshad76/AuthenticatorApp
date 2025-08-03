@@ -100,4 +100,8 @@ class SignUpFragment : DaggerFragment(), SignUpContract.SignUpView {
             Toast.LENGTH_SHORT
         ).show()
     }
+
+    override fun navigateToLogin(username: String, password: String) {
+        //SignUpFragmentDirections
+    }
 }

@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.safe.args.kotlin)
     id("kotlin-kapt")
 }
 
@@ -71,23 +72,23 @@ dependencies {
     ///rxbinding
     implementation(libs.rxbinding.appcompat.v310)
     implementation(libs.rxbinding.core.v310)
-    implementation (libs.rxbinding.material)
+    implementation(libs.rxbinding.material)
 
     ///retrofit, gson converter, and okhttp3
     implementation(libs.retrofit)
-    implementation (libs.adapter.rxjava2)
+    implementation(libs.adapter.rxjava2)
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
 
     ///glide
-    implementation (libs.glide)
-    annotationProcessor (libs.compiler)
+    implementation(libs.glide)
+    annotationProcessor(libs.compiler)
 
     ///room
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     kapt(libs.androidx.room.compiler)
-    implementation (libs.androidx.room.rxjava2)
+    implementation(libs.androidx.room.rxjava2)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

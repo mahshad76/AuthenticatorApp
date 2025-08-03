@@ -6,15 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.mahshad.authenticatorapp.R
-import com.mahshad.authenticatorapp.common.AppCompatActivityExtensions.replaceFragment
 import com.mahshad.authenticatorapp.databinding.ActivityMainBinding
-import com.mahshad.authenticatorapp.welcome.ui.login.LoginFragment
 
 class WelcomeActivity : AppCompatActivity() {
     private lateinit var activityHomeBinding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        //AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         activityHomeBinding = ActivityMainBinding.inflate(layoutInflater)
@@ -23,9 +20,6 @@ class WelcomeActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
-        }
-        if (savedInstanceState == null) {
-            replaceFragment(R.id.fragment_container, LoginFragment())
         }
     }
 }
