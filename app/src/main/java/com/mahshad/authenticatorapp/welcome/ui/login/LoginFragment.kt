@@ -1,7 +1,6 @@
 package com.mahshad.authenticatorapp.welcome.ui.login
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,13 +10,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.textChanges
 import com.mahshad.authenticatorapp.R
 import com.mahshad.authenticatorapp.common.DaggerFragmentExtensions.navigate
 import com.mahshad.authenticatorapp.databinding.FragmentLoginBinding
-import com.mahshad.authenticatorapp.home.HomeActivity
 import dagger.android.support.DaggerFragment
 import io.reactivex.Observable
 import javax.inject.Inject
@@ -111,8 +110,7 @@ class LoginFragment : DaggerFragment(), Contract.View {
             myContext, "Successful Login",
             Toast.LENGTH_SHORT
         ).show()
-        val intent = Intent(activity, HomeActivity::class.java)
-        startActivity(intent)
+        findNavController().navigate(R.id.from_login_to_home)
     }
 
     override fun getUsername() = usernameText.text.toString()
