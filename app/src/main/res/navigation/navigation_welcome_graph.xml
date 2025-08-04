@@ -15,6 +15,14 @@
         <action
             android:id="@+id/navigate_from_login_to_forgotPass"
             app:destination="@id/forgetPasswordFragment" />
+        <argument
+            android:name="username"
+            android:defaultValue=""
+            app:argType="string" />
+        <argument
+            android:name="password"
+            android:defaultValue=""
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/forgetPasswordFragment"
