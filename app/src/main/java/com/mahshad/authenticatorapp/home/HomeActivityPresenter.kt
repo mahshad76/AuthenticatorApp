@@ -4,7 +4,7 @@ import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.mahshad.authenticatorapp.R
-import com.mahshad.authenticatorapp.common.AppCompatActivityExtensions.replaceFragment
+import com.mahshad.authenticatorapp.common.replaceFragment
 import com.mahshad.authenticatorapp.home.di.HomeActivityDisposable
 import com.mahshad.authenticatorapp.home.di.Scopes
 import com.mahshad.authenticatorapp.home.ui.favorite.FavoriteFragment

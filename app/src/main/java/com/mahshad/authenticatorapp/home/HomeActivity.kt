@@ -5,7 +5,7 @@ import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.jakewharton.rxbinding3.material.itemSelections
 import com.mahshad.authenticatorapp.R
-import com.mahshad.authenticatorapp.common.AppCompatActivityExtensions.replaceFragment
+import com.mahshad.authenticatorapp.common.replaceFragment
 import com.mahshad.authenticatorapp.databinding.ActivityHomeBinding
 import com.mahshad.authenticatorapp.home.ui.home.HomeFragment
 import dagger.android.support.DaggerAppCompatActivity

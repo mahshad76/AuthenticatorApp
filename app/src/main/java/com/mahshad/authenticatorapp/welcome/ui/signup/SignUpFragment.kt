@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.textChanges
 import com.mahshad.authenticatorapp.R
@@ -112,8 +113,10 @@ class SignUpFragment : DaggerFragment(), SignUpContract.SignUpView {
         ).show()
     }
 
-    override fun navigateToLogin() {
+    override fun navigateToLogin(username: String, password: String) {
         Log.d("TAG", "navigateToLogin: nav back")
-        navController.navigate(R.id.navigate_from_signup_to_login)
+        val direction = SignUpFragmentDirections.navigateFromSignupToLogin(username, password)
+        findNavController().navigate(direction)
+
     }
 }

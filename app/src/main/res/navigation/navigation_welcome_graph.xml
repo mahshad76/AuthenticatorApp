@@ -40,6 +40,13 @@
         tools:layout="@layout/fragment_sign_up">
         <action
             android:id="@+id/navigate_from_signup_to_login"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment">
+            <argument
+                android:name="username"
+                app:argType="string" />
+            <argument
+                android:name="password"
+                app:argType="string" />
+        </action>
     </fragment>
 </navigation>

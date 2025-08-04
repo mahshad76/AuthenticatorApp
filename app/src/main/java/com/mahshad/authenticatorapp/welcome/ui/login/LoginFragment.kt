@@ -12,6 +12,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.NavController
+import androidx.navigation.fragment.navArgs
 import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.textChanges
 import com.mahshad.authenticatorapp.R
@@ -35,6 +36,8 @@ class LoginFragment : DaggerFragment(), Contract.View {
     private lateinit var loginButtonObservable: Observable<Unit>
     private lateinit var navController: NavController
     private lateinit var myContext: Context
+
+    private val args: LoginFragmentArgs by navArgs()
 
     @Inject
     lateinit var presenter: Contract.Presenter
@@ -82,6 +85,18 @@ class LoginFragment : DaggerFragment(), Contract.View {
         presenter.loginValidationFlow(usernameObservable, passwordObservable)
         presenter.loginCheck(loginButtonObservable)
         return loginFragment.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        usernameText.text.apply {
+            clear()
+            append(args.username)
+        }
+        passwordText.text.apply {
+            clear()
+            append(args.password)
+        }
     }
 
     override fun setLoginButtonEnabled(isEnabled: Boolean) {
