@@ -15,6 +15,7 @@ import androidx.navigation.findNavController
 import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.textChanges
 import com.mahshad.authenticatorapp.R
+import com.mahshad.authenticatorapp.common.DaggerFragmentExtensions.navigate
 import com.mahshad.authenticatorapp.databinding.FragmentSignUpBinding
 import dagger.android.support.DaggerFragment
 import io.reactivex.Observable
@@ -61,7 +62,7 @@ class SignUpFragment : DaggerFragment(), SignUpContract.SignUpView {
         signUpButtonObservable = signUpButton.clicks()
         navigateBack = signUpFragment.navigateBack
         navigateBack.setOnClickListener {
-            parentFragmentManager.popBackStack()
+            navigate(R.id.navigate_from_signup_to_login)
         }
         presenter.attachView(this)
         presenter.signUpValidationFlow(

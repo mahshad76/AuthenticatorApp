@@ -11,6 +11,8 @@ import android.widget.TextView
 import android.widget.Toast
 import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.textChanges
+import com.mahshad.authenticatorapp.R
+import com.mahshad.authenticatorapp.common.DaggerFragmentExtensions.navigate
 import com.mahshad.authenticatorapp.databinding.FragmentForgetPasswordBinding
 import dagger.android.support.DaggerFragment
 import io.reactivex.Observable
@@ -64,7 +66,7 @@ class ForgetPasswordFragment : DaggerFragment(), ForgotPassContract.View {
         buttonObservable = button.clicks()
         navigateBack = fragmentForgetPasswordBinding.signIn
         navigateBack.setOnClickListener {
-            parentFragmentManager.popBackStack()
+            navigate(R.id.navigate_from_forgotpass_to_login)
         }
         presenter.attachView(this)
         presenter.enablingResetPassButton(passwordTextObservable, confirmPasswordTextObservable)
