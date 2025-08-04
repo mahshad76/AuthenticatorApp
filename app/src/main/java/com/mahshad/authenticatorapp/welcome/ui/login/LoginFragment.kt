@@ -11,15 +11,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
 import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.textChanges
 import com.mahshad.authenticatorapp.R
-import com.mahshad.authenticatorapp.common.AppCompatActivityExtensions.replaceFragment
+import com.mahshad.authenticatorapp.common.DaggerFragmentExtensions.navigate
 import com.mahshad.authenticatorapp.databinding.FragmentLoginBinding
 import com.mahshad.authenticatorapp.home.HomeActivity
-import com.mahshad.authenticatorapp.welcome.ui.forgetpassword.ForgetPasswordFragment
-import com.mahshad.authenticatorapp.welcome.ui.signup.SignUpFragment
 import dagger.android.support.DaggerFragment
 import io.reactivex.Observable
 import javax.inject.Inject
@@ -35,6 +33,7 @@ class LoginFragment : DaggerFragment(), Contract.View {
     private lateinit var usernameObservable: Observable<CharSequence>
     private lateinit var passwordObservable: Observable<CharSequence>
     private lateinit var loginButtonObservable: Observable<Unit>
+    private lateinit var navController: NavController
     private lateinit var myContext: Context
 
     @Inject
@@ -45,7 +44,6 @@ class LoginFragment : DaggerFragment(), Contract.View {
     }
 
     override fun onAttach(context: Context) {
-        ///AndroidSupportInjection.inject(this)
         super.onAttach(context)
         myContext = context
     }
@@ -71,15 +69,11 @@ class LoginFragment : DaggerFragment(), Contract.View {
         loginButton = loginFragment.myGradientMaterialButton
         signupText = loginFragment.registrationText
         signupText.setOnClickListener {
-            (activity as AppCompatActivity).replaceFragment(
-                R.id.fragment_container, SignUpFragment()
-            )
+            navigate(R.id.navigate_from_login_to_signup)
         }
         forgetPassText = loginFragment.forgetPassword
         forgetPassText.setOnClickListener {
-            (activity as AppCompatActivity).replaceFragment(
-                R.id.fragment_container, ForgetPasswordFragment()
-            )
+            navigate(R.id.navigate_from_login_to_forgotPass)
         }
         usernameObservable = usernameText.textChanges()
         passwordObservable = passwordText.textChanges()

@@ -11,7 +11,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.textChanges
 import com.mahshad.authenticatorapp.R
@@ -79,7 +79,7 @@ class SignUpFragment : DaggerFragment(), SignUpContract.SignUpView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navController = Navigation.findNavController(view)
+        navController = view.findNavController()
     }
 
     override fun onDetach() {
@@ -113,6 +113,6 @@ class SignUpFragment : DaggerFragment(), SignUpContract.SignUpView {
 
     override fun navigateToLogin() {
         Log.d("TAG", "navigateToLogin: nav back")
-        navController.navigate(R.id.navigate_from_signup_to_forgotPass)
+        navController.navigate(R.id.navigate_from_signup_to_login)
     }
 }

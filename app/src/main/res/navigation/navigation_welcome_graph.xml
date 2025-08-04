@@ -3,29 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_welcome_graph"
-    app:startDestination="@id/signUpFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.mahshad.authenticatorapp.welcome.ui.login.LoginFragment"
         android:label="LoginFragment">
-<!--        <argument-->
-<!--            android:name="username"-->
-<!--            android:defaultValue="-1"-->
-<!--            app:argType="string" />-->
-<!--        <argument-->
-<!--            android:name="password"-->
-<!--            android:defaultValue="-1"-->
-<!--            app:argType="string" />-->
+        <action
+            android:id="@+id/navigate_from_login_to_signup"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/navigate_from_login_to_forgotPass"
+            app:destination="@id/forgetPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/forgetPasswordFragment"
         android:name="com.mahshad.authenticatorapp.welcome.ui.forgetpassword.ForgetPasswordFragment"
         android:label="fragment_forget_password"
         tools:layout="@layout/fragment_forget_password">
-<!--        <action-->
-<!--            android:id="@+id/navigate_from_forgotpass_to_login"-->
-<!--            app:destination="@id/loginFragment" />-->
+        <action
+            android:id="@+id/navigate_from_forgotpass_to_login"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -33,14 +31,7 @@
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up">
         <action
-            android:id="@+id/navigate_from_signup_to_forgotPass"
-            app:destination="@id/forgetPasswordFragment">
-<!--            <argument-->
-<!--                android:name="username"-->
-<!--                app:argType="string" />-->
-<!--            <argument-->
-<!--                android:name="password"-->
-<!--                app:argType="string" />-->
-        </action>
+            android:id="@+id/navigate_from_signup_to_login"
+            app:destination="@id/loginFragment" />
     </fragment>
 </navigation>
