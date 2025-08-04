@@ -1,6 +1,5 @@
 package com.mahshad.authenticatorapp.welcome.ui.signup
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -37,7 +36,6 @@ class SignUpFragment : DaggerFragment(), SignUpContract.SignUpView {
     private lateinit var signUpButtonObservable: Observable<Unit>
     private lateinit var navigateBack: TextView
     private lateinit var navController: NavController
-    private lateinit var myContext: Context
 
     @Inject
     lateinit var presenter: SignUpContract.SignUpPresenter

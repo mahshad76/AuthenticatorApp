@@ -11,7 +11,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.navigation.NavController
 import androidx.navigation.fragment.navArgs
 import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.textChanges
@@ -34,9 +33,7 @@ class LoginFragment : DaggerFragment(), Contract.View {
     private lateinit var usernameObservable: Observable<CharSequence>
     private lateinit var passwordObservable: Observable<CharSequence>
     private lateinit var loginButtonObservable: Observable<Unit>
-    private lateinit var navController: NavController
     private lateinit var myContext: Context
-
     private val args: LoginFragmentArgs by navArgs()
 
     @Inject

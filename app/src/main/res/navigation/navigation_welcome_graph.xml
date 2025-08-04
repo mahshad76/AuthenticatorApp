@@ -49,4 +49,9 @@
                 app:argType="string" />
         </action>
     </fragment>
+    <activity
+        android:id="@+id/home_activity"
+        android:name="com.mahshad.authenticatorapp.home.HomeActivity"
+        android:label="Home Host"
+        tools:layout="@layout/activity_home" />
 </navigation>
