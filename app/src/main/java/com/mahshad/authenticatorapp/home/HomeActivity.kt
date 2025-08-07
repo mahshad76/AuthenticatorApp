@@ -2,12 +2,12 @@ package com.mahshad.authenticatorapp.home
 
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.jakewharton.rxbinding3.material.itemSelections
 import com.mahshad.authenticatorapp.R
-import com.mahshad.authenticatorapp.common.replaceFragment
 import com.mahshad.authenticatorapp.databinding.ActivityHomeBinding
-import com.mahshad.authenticatorapp.home.ui.home.HomeFragment
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.Observable
 import javax.inject.Inject
@@ -27,11 +27,23 @@ class HomeActivity : DaggerAppCompatActivity(), HomeActivityContract.View {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         navView = binding.navView
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_home2)
+                    as NavHostFragment
+        val navController = navHostFragment.navController
+        navView.setupWithNavController(navController)
+
+
+//        val navHostFragment = supportFragmentManager
+//            .findFragmentById(R.id.)
+//        (binding.navHostFragmentActivityHome2) as NavHostFragment
+//        val navController = navHostFragment.navController
+//        navView.setupWithNavController(navController)
         bottomNavigationObs = navView.itemSelections()
 
         if (savedInstanceState == null) {
-            replaceFragment(R.id.nav_host_fragment_activity_home2, HomeFragment())
-            presenter.replaceFragmentCall(bottomNavigationObs)
+            ///replaceFragment(R.id.nav_host_fragment_activity_home2, HomeFragment())
+            //presenter.replaceFragmentCall(bottomNavigationObs)
         }
     }
 
