@@ -38,3 +38,26 @@ The Presenter acts as the middle-man between the View and the Model. It is the h
 The Model is responsible for managing the application's data sources.
 - Responsibility: Handles all data operations, including remote API calls (fetching Apple news), local database transactions (persisting liked articles), and user authentication status management.
 - Key Principle: The Model is completely unaware of the View and the Presenter, ensuring the data logic can be easily swapped or updated without affecting the UI.
+
+# 🛠️ Technologies & Libraries
+
+The AppleNewsApp is developed using the **Kotlin** language and is structured around the Model-View-Presenter (MVP) architecture. Key components and third-party libraries leveraged in this project include:
+
+1.  **Core Development Stack**
+    * **Kotlin:** The primary, modern programming language used for its conciseness, safety, and interoperability with Android's framework.
+    * **XML Layouts:** Utilized for declaring flexible and responsive user interface views across all screens.
+
+2.  **Dependency Injection**
+    * **Dagger 2:** A powerful, compile-time dependency injection framework that manages the creation and provision of essential objects (Presenters, Models, Services), which is foundational for enabling the MVP architecture and facilitating unit testing.
+
+3.  **Reactive Programming**
+    * **RxJava 2, RxAndroid, & RxBinding:** A comprehensive suite for managing asynchronous operations and data streams. It is used to handle concurrent tasks like network requests and database access, as well as binding UI events (like search input) reactively.
+
+4.  **Networking & API Communication**
+    * **Retrofit, OkHttp, & Gson:** This combination forms the robust network layer. **Retrofit** is the type-safe HTTP client for defining API endpoints; **OkHttp** handles the efficient, underlying network protocol; and **Gson** automatically deserializes JSON API responses into native Kotlin data objects.
+
+5.  **Data Persistence**
+    * **Room:** The official Android persistence library that provides a reliable abstraction over SQLite. It is used in the Model layer to locally cache news data and persistently store the user's liked articles.
+
+6.  **Image Handling**
+    * **Glide:** A dedicated, high-performance image management library responsible for quickly fetching, caching, and displaying high-quality article thumbnails while minimizing memory usage and preventing common loading issues.
